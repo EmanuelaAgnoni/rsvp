@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RSVP — Pierpaolo &amp; Emanuela</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root{--cream:#f5ebdd;--paper:#fff8ed;--red:#e94a2b;--green:#278b6a;--yellow:#e9d85a;--pink:#e9b7b4;--blue:#315da8;--ink:#183b32}
+
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+
+body{margin:0;min-height:100vh;background:var(--yellow);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+
+button,input,textarea{font:inherit} ::selection{background:var(--pink);color:var(--red)}
+
+.page{position:relative;min-height:100svh;display:grid;place-items:center;padding:70px 20px;overflow:hidden}
+
+.back{position:absolute;top:24px;left:24px;z-index:5;color:var(--green);text-decoration:none;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+
+.back:hover{color:var(--red)}
+
+.doodle{position:absolute;pointer-events:none;fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+
+.lemon{width:110px;right:5%;top:6%;color:var(--blue);transform:rotate(10deg)}
+
+.flower{width:125px;left:4%;bottom:5%;color:var(--green);transform:rotate(-13deg)}
+
+.wrap{position:relative;z-index:2;width:min(720px,100%)}
+
+.kicker{margin:0 0 24px;text-align:center;color:var(--red);font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase}
+
+.title{margin:0 0 42px;text-align:center;color:var(--red);font-family:"Instrument Serif",Georgia,serif;font-size:clamp(64px,11vw,108px);font-weight:400;line-height:.75;letter-spacing:-.04em}
+
+.title em{display:block;color:var(--blue);font-weight:400}
+
+.card{position:relative;min-height:500px;padding:64px 55px 54px;background:var(--paper);border:2px solid var(--green);box-shadow:10px 11px 0 var(--pink);transform:rotate(-.35deg)}
+
+.card::before{content:"✿";position:absolute;top:18px;left:22px;color:var(--red);font-size:30px;transform:rotate(-14deg)}
+
+.card::after{content:"♥";position:absolute;right:25px;bottom:20px;color:var(--blue);font-size:25px;transform:rotate(9deg)}
+
+.progress{display:flex;gap:7px;margin:0 auto 42px;max-width:260px}
+
+.progress span{height:7px;flex:1;background:var(--cream);border:1px solid var(--green);transition:background .25s ease}
+
+.progress span.active{background:var(--green)}
+
+.step{display:none;text-align:center;animation:appear .35s ease}
+
+.step.active{display:block}
+
+@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.question-number{margin-bottom:15px;color:var(--green);font-size:9px;font-weight:600;letter-spacing:.25em;text-transform:uppercase}
+
+.question{margin:0 auto 25px;max-width:590px;color:var(--red);font-family:"Instrument Serif",Georgia,serif;font-size:clamp(40px,7vw,66px);font-weight:400;line-height:.92}
+
+.helper{max-width:500px;margin:0 auto 28px;color:var(--blue);font-family:"Instrument Serif",Georgia,serif;font-size:18px;font-style:italic;line-height:1.4}
+
+.choices{display:flex;flex-wrap:wrap;justify-content:center;gap:13px}
+
+.choice,.next,.submit{appearance:none;border:2px solid var(--red);background:var(--red);color:var(--paper);padding:15px 22px;cursor:pointer;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;transition:transform .2s,background .2s,color .2s}
+
+.choice:hover,.next:hover,.submit:hover{transform:rotate(-1.5deg);background:var(--yellow);color:var(--red)}
+
+.choice.selected{background:var(--green);border-color:var(--green);color:var(--paper)}
+
+.field{width:min(500px,100%);margin:0 auto;display:block;border:0;border-bottom:2px solid var(--green);border-radius:0;outline:none;background:transparent;color:var(--ink);padding:12px 5px;text-align:center;font-family:"Instrument Serif",Georgia,serif;font-size:28px}
+
+textarea.field{min-height:120px;resize:vertical;border:2px solid var(--green);padding:16px;text-align:left;font-size:21px}
+
+.field::placeholder{color:#829c8f}
+
+.actions{display:flex;justify-content:center;gap:14px;margin-top:38px}
+
+.prev{border:0;background:transparent;color:var(--blue);cursor:pointer;padding:14px 10px;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+
+.prev:hover{color:var(--red)}
+
+.error{min-height:20px;margin-top:18px;color:var(--red);font-size:11px}
+
+.finish{display:none;text-align:center}
+
+.finish.active{display:block}
+
+.finish h2{margin:10px 0 25px;color:var(--red);font-family:"Instrument Serif",Georgia,serif;font-size:clamp(65px,11vw,105px);font-weight:400;line-height:.75}
+
+.finish h2 em{display:block;color:var(--green);font-weight:400}
+
+.finish p{max-width:430px;margin:0 auto;color:var(--blue);font-family:"Instrument Serif",Georgia,serif;font-size:21px;font-style:italic;line-height:1.45}
+
+.finish a{display:inline-block;margin-top:35px;color:var(--red);font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+
+.note{max-width:560px;margin:30px auto 0;text-align:center;color:var(--green);font-size:10px;line-height:1.5}
+
+@media(max-width:650px){.page{padding:75px 16px 55px}.back{top:20px;left:18px}.title{margin-bottom:32px}.card{min-height:500px;padding:58px 24px 45px;box-shadow:7px 8px 0 var(--pink)}.question{font-size:clamp(40px,13vw,62px)}.lemon,.flower{width:75px;opacity:.8}.actions{flex-wrap:wrap}}
+
+</style>
+
+</head>
+
+<body>
+
+<main class="page">
+
+  <a class="back" href="index.html">← Back to invitation</a>
+
+
+
+  <svg class="doodle lemon" viewBox="0 0 120 120"><ellipse cx="58" cy="67" rx="31" ry="40" transform="rotate(-25 58 67)"/><path d="M72 33 C78 15 97 15 101 24 C90 32 81 36 72 33"/></svg>
+
+  <svg class="doodle flower" viewBox="0 0 120 180"><path d="M60 175 C57 135 60 100 58 64"/><path d="M58 116 C31 103 25 125 53 136"/><path d="M60 143 C85 126 95 145 66 157"/><path d="M58 65 C35 61 27 42 40 35 C40 14 57 14 60 35 C67 14 84 19 79 39 C101 39 96 61 75 65 C72 84 51 82 58 65"/></svg>
+
+
+
+  <div class="wrap">
+
+    <div class="kicker">Pierpaolo + Emanuela · 03.09.2027</div>
+
+    <h1 class="title">RSVP<em>with love.</em></h1>
+
+
+
+    <section class="card">
+
+      <div class="progress" id="progress"></div>
+
+
+
+      <form id="rsvpForm">
+
+        <div class="step active" data-step="0">
+
+          <div class="question-number">01 · Your party</div>
+
+          <h2 class="question">What is your name?</h2>
+
+          <p class="helper">Please enter multiple names if you are with family.</p>
+
+          <input class="field" name="name" id="name" autocomplete="name" placeholder="Name(s)">
+
+          <div class="error"></div>
+
+          <div class="actions"><button class="next" type="button">Next →</button></div>
+
+        </div>
+
+
+
+        <div class="step" data-step="1">
+
+          <div class="question-number">02 · The important bit</div>
+
+          <h2 class="question">Are you attending the wedding?</h2>
+
+          <div class="choices">
+
+            <button class="choice" type="button" data-field="attendance" data-value="Yes">Yes ♥</button>
+
+            <button class="choice" type="button" data-field="attendance" data-value="No">No</button>
+
+          </div>
+
+          <input type="hidden" name="attendance" id="attendance">
+
+          <div class="error"></div>
+
+          <div class="actions">
+
+            <button class="prev" type="button">← Back</button>
+
+            <button class="next" id="attendanceNext" type="button">Next →</button>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="step" data-step="2">
+
+          <div class="question-number">03 · Food</div>
+
+          <h2 class="question">Any dietary requirements or allergies?</h2>
+
+          <p class="helper">Please mention who they apply to.</p>
+
+          <textarea class="field" name="dietary" id="dietary" placeholder="No requirements / tell us here..."></textarea>
+
+          <div class="error"></div>
+
+          <div class="actions"><button class="prev" type="button">← Back</button><button class="submit" type="submit">Submit RSVP ♥</button></div>
+
+        </div>
+
+      </form>
+
+
+
+      <div class="finish" id="finish">
+
+        <div class="question-number">RSVP submitted</div>
+
+        <h2>Thank you!<em>♥</em></h2>
+
+        <p id="thanksText">Thank you for submitting your RSVP. ♥</p>
+
+        <a href="/">Back to the invitation →</a>
+
+      </div>
+
+    </section>
+
+
+
+
+
+  </div>
+
+</main>
+
+
+
+<script>
+
+const steps=[...document.querySelectorAll(".step")];
+
+const progress=document.getElementById("progress");
+
+const form=document.getElementById("rsvpForm");
+
+const finish=document.getElementById("finish");
+
+let current=0;
+
+
+
+steps.forEach(()=>progress.appendChild(document.createElement("span")));
+
+
+
+function render(){
+
+  steps.forEach((step,i)=>step.classList.toggle("active",i===current));
+
+  [...progress.children].forEach((dot,i)=>dot.classList.toggle("active",i<=current));
+
+  window.scrollTo({top:0,behavior:"smooth"});
+
+}
+
+
+
+document.querySelectorAll(".choice").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    const field=button.dataset.field;
+
+    document.getElementById(field).value=button.dataset.value;
+
+    document.querySelectorAll(`[data-field="${field}"]`).forEach(b=>b.classList.remove("selected"));
+
+    button.classList.add("selected");
+
+
+
+    if(field==="attendance"){
+
+      document.getElementById("attendanceNext").textContent=
+
+        button.dataset.value==="No"?"Submit RSVP ♥":"Next →";
+
+    }
+
+  });
+
+});
+
+
+
+function error(message){
+
+  steps[current].querySelector(".error").textContent=message;
+
+  return false;
+
+}
+
+
+
+function validate(){
+
+  steps[current].querySelector(".error").textContent="";
+
+  if(current===0 && !document.getElementById("name").value.trim())
+
+    return error("Please enter your name.");
+
+  if(current===1 && !document.getElementById("attendance").value)
+
+    return error("Please choose yes or no.");
+
+  return true;
+
+}
+
+
+
+let submitting = false;
+
+async function submitRSVP() {
+  if (submitting) return;
+  submitting = true;
+  const buttons = form.querySelectorAll('button');
+  buttons.forEach(button => button.disabled = true);
+  steps[current].querySelector('.error').textContent = '';
+
+  try {
+    const response = await fetch('/api/rsvp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('name').value.trim(),
+        attending: document.getElementById('attendance').value.toLowerCase(),
+        dietary: document.getElementById('attendance').value === 'Yes'
+          ? document.getElementById('dietary').value.trim()
+          : ''
+      })
+    });
+    if (!response.ok) throw new Error('RSVP save failed');
+    complete();
+  } catch (err) {
+    console.error(err);
+    steps[current].querySelector('.error').textContent =
+      'Unable to save your RSVP. Please try again.';
+  } finally {
+    submitting = false;
+    buttons.forEach(button => button.disabled = false);
+  }
+}
+
+function complete(){
+
+  form.style.display="none";
+
+  progress.style.display="none";
+
+  finish.classList.add("active");
+
+}
+
+
+
+document.querySelectorAll(".next").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    if(!validate())return;
+
+
+
+    // A "No" attendance response ends the RSVP immediately.
+
+    if(current===1 && document.getElementById("attendance").value==="No"){
+
+      submitRSVP();
+
+      return;
+
+    }
+
+
+
+    if(current<steps.length-1){
+
+      current++;
+
+      render();
+
+    }
+
+  });
+
+});
+
+
+
+document.querySelectorAll(".prev").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    if(current>0){current--;render();}
+
+  });
+
+});
+
+
+
+form.addEventListener("submit",event=>{
+
+  event.preventDefault();
+
+  if(!validate())return;
+
+  submitRSVP();
+
+});
+
+
+
+render();
+
+</script>
+
+</body>
+
+</html>

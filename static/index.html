@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pierpaolo &amp; Emanuela — 03.09.2027</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap');
+:root{--cream:#f5ebdd;--paper:#fff8ed;--red:#e94a2b;--green:#278b6a;--yellow:#e9d85a;--pink:#e9b7b4;--blue:#315da8;--ink:#183b32}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+a{font:inherit} ::selection{background:var(--yellow);color:var(--red)}
+.opening{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:var(--yellow);transition:opacity .8s ease,visibility .8s ease;overflow:hidden}
+.opening.finished{opacity:0;visibility:hidden;pointer-events:none}
+.opening-inner{width:min(88vw,590px);text-align:center}
+.opening-title{margin-bottom:40px;color:var(--red);font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase}
+.title-star{display:inline-block;margin-left:7px;color:var(--red);font-size:12px;line-height:1;transform:rotate(8deg)}
+.envelope-wrap{perspective:1400px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.envelope{position:relative;width:100%;aspect-ratio:1.48/1;filter:drop-shadow(8px 11px 0 rgba(49,93,168,.17))}
+.envelope-back{position:absolute;inset:0;background:var(--pink);border:2px solid var(--red)}
+.liner{position:absolute;inset:3%;background-color:var(--paper);background-image:linear-gradient(90deg,var(--green) 0 23%,transparent 23% 48%,var(--green) 48% 73%,transparent 73%),linear-gradient(var(--green) 0 23%,transparent 23% 48%,var(--green) 48% 73%,transparent 73%);background-size:55px 55px;transform:rotate(.5deg);opacity:0;transition:opacity .18s ease .35s}
+.invite-card{position:absolute;left:10%;bottom:5%;width:80%;height:86%;display:grid;place-items:center;z-index:2;background:var(--paper);border:2px solid var(--red);transform:translateY(20%);opacity:0;visibility:hidden;transition:transform 1.25s cubic-bezier(.2,.8,.2,1),opacity .18s ease .42s}
+.invite-card::before{content:"✿";position:absolute;top:15px;left:20px;color:var(--red);font-size:34px;transform:rotate(-15deg)}
+.invite-card::after{content:"✿";position:absolute;right:20px;bottom:15px;color:var(--blue);font-size:31px;transform:rotate(13deg)}
+.card-inner{padding:25px;text-align:center} .card-small{margin-bottom:13px;color:var(--green);font-size:8px;font-weight:600;letter-spacing:.25em;text-transform:uppercase}
+.card-names{margin:0;color:var(--red);font-family:"Instrument Serif",Georgia,serif;font-size:clamp(37px,7vw,57px);font-weight:400;line-height:.82}
+.card-names em{display:block;margin:8px;color:var(--blue);font-size:.7em;font-weight:400}
+.card-date{margin-top:20px;color:var(--green);font-size:9px;font-weight:600;letter-spacing:.25em}
+.env-left,.env-right,.env-bottom{position:absolute;inset:0;z-index:3;pointer-events:none}
+.env-left{background:#efc4c0;clip-path:polygon(0 0,52% 52%,0 100%)} .env-right{background:#e9b7b4;clip-path:polygon(100% 0,48% 52%,100% 100%)} .env-bottom{background:#f1c8c2;clip-path:polygon(0 100%,50% 47%,100% 100%)}
+.flap{position:absolute;inset:0;z-index:5;background:#efc0bd;clip-path:polygon(0 0,50% 62%,100% 0);transform-origin:top center;transition:transform .9s cubic-bezier(.4,0,.2,1),z-index 0s linear .42s;backface-visibility:hidden}
+.seal{position:absolute;left:50%;top:58%;z-index:6;width:65px;height:60px;display:grid;place-items:center;transform:translate(-50%,-50%) rotate(-5deg);background:var(--red);color:var(--yellow);border-radius:48% 52% 45% 55% / 53% 44% 56% 47%;font-family:"Instrument Serif",serif;font-size:19px;font-style:italic;transition:opacity .3s,transform .5s}
+.envelope-wrap.open .liner{opacity:1}.envelope-wrap.open .invite-card{opacity:1;visibility:visible}.envelope-wrap.open .flap{transform:rotateX(180deg);z-index:1} .envelope-wrap.open .seal{opacity:0;transform:translate(-50%,-50%) rotate(18deg) scale(.5)} .envelope-wrap.open .invite-card{transform:translateY(-44%)}
+.hero{position:relative;min-height:100svh;display:grid;place-items:center;padding:90px 24px;overflow:hidden;background:var(--yellow)}
+.hero-inner{position:relative;z-index:2;width:min(720px,100%);text-align:center}
+.hero h1{margin:0;color:var(--red);font-family:"Instrument Serif",Georgia,serif;font-size:clamp(68px,13vw,130px);font-weight:400;line-height:.72;letter-spacing:-.045em}
+.hero h1 em{display:block;margin:22px 0 19px;color:var(--blue);font-size:.53em;font-weight:400}
+.invite-copy{max-width:470px;margin:50px auto 0;font-family:"Instrument Serif",Georgia,serif;font-size:21px;font-style:italic;line-height:1.45}
+.main-date{margin-top:42px;color:var(--blue);font-size:12px;font-weight:600;letter-spacing:.3em} .main-place{margin-top:12px;color:var(--green);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase}
+.doodle{position:absolute;pointer-events:none;overflow:visible} .doodle path,.doodle circle,.doodle ellipse{fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.flower-one{width:130px;top:4%;left:3%;color:var(--green);transform:rotate(-12deg)} .flower-two{width:125px;right:2%;bottom:5%;color:var(--red);transform:rotate(14deg)} .lemon{width:100px;top:7%;right:6%;color:var(--blue);transform:rotate(8deg)} .wine{width:95px;bottom:5%;left:7%;color:var(--red);transform:rotate(-8deg)}
+.paper-zone{padding:110px 20px;background:var(--cream)} .paper{position:relative;width:min(850px,100%);min-height:520px;display:grid;place-items:center;margin:auto;padding:75px;overflow:hidden;background:var(--paper);border:2px solid var(--red);box-shadow:10px 11px 0 var(--pink);transform:rotate(-.45deg)}
+.paper-content{position:relative;z-index:2;width:100%;text-align:center} .small-title{margin-bottom:35px;color:var(--green);font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase}
+.big-heading{margin:0;color:var(--red);font-family:"Instrument Serif",Georgia,serif;font-size:clamp(62px,11vw,110px);font-weight:400;line-height:.77;letter-spacing:-.045em} .big-heading em{color:var(--blue);font-weight:400}
+.checker{min-height:250px;display:grid;place-items:center;padding:50px 20px;background-color:var(--paper);background-image:linear-gradient(90deg,var(--green) 0 50%,transparent 50%),linear-gradient(var(--green) 0 50%,transparent 50%);background-size:90px 90px;background-position:0 0,45px 45px}
+.checker-note{max-width:480px;padding:28px 35px;background:var(--paper);border:2px solid var(--red);color:var(--red);text-align:center;font-family:"Instrument Serif",serif;font-size:32px;font-style:italic;transform:rotate(2deg)}
+.venue{position:relative;min-height:760px;display:grid;place-items:center;padding:100px 25px;overflow:hidden;background:var(--blue)} .venue-card{position:relative;z-index:2;width:min(720px,100%);padding:70px 50px;background:var(--yellow);border:2px solid var(--ink);text-align:center;transform:rotate(.7deg);box-shadow:-10px 12px 0 var(--red)}
+.venue-card h2{margin:0;color:var(--red);font-family:"Instrument Serif",serif;font-size:clamp(62px,10vw,100px);font-weight:400;line-height:.78} .venue-card h2 em{display:block;color:var(--green);font-weight:400}
+.venue-name{margin-top:45px;color:var(--blue);font-family:"Instrument Serif",serif;font-size:30px} .venue-location{margin-top:8px;font-size:9px;font-weight:600;letter-spacing:.26em;text-transform:uppercase}
+.map-link{display:inline-block;margin-top:35px;padding:14px 23px;background:var(--red);color:var(--paper);border:2px solid var(--red);text-decoration:none;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;transition:transform .2s,background .2s,color .2s} .map-link:hover{transform:rotate(-2deg);background:transparent;color:var(--red)}
+.rsvp{position:relative;min-height:100svh;display:grid;place-items:center;padding:100px 25px;overflow:hidden;background:var(--pink)} .rsvp-card{position:relative;z-index:2;width:min(650px,100%);padding:70px 45px;background:var(--paper);border:2px solid var(--green);text-align:center;box-shadow:10px 10px 0 var(--green);transform:rotate(-.6deg)}
+.rsvp-small{color:var(--blue);font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase} .rsvp-card h2{margin:27px 0 0;color:var(--red);font-family:"Instrument Serif",serif;font-size:clamp(70px,13vw,125px);font-weight:400;line-height:.72} .rsvp-card h2 em{display:block;color:var(--green);font-size:.7em;font-weight:400}
+.rsvp-text{max-width:380px;margin:45px auto 32px;color:var(--blue);font-family:"Instrument Serif",serif;font-size:20px;font-style:italic;line-height:1.45}
+.rsvp-button{display:inline-block;padding:17px 28px;background:var(--red);color:var(--paper);border:2px solid var(--red);text-decoration:none;font-size:9px;font-weight:600;letter-spacing:.27em;text-transform:uppercase;transition:transform .2s,background .2s,color .2s} .rsvp-button:hover{transform:rotate(2deg);background:var(--yellow);color:var(--red)}
+footer{padding:80px 25px;background:var(--yellow);text-align:center} .footer-name{color:var(--red);font-family:"Instrument Serif",serif;font-size:42px;font-style:italic} .footer-date{margin-top:14px;color:var(--blue);font-size:9px;font-weight:600;letter-spacing:.27em;text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(30px) rotate(.4deg);transition:opacity .9s ease,transform .9s ease} .reveal.visible{opacity:1;transform:translateY(0) rotate(0)}
+@media(max-width:700px){.opening-inner{width:90vw}.opening-title{margin-bottom:55px}.hero{padding:100px 22px 85px}.hero h1{font-size:clamp(67px,21vw,105px)}.invite-copy{max-width:330px;font-size:19px}.doodle{opacity:.85}.flower-one,.flower-two{width:80px}.lemon,.wine{width:65px}.paper-zone{padding:70px 16px}.paper{min-height:470px;padding:65px 28px;box-shadow:7px 8px 0 var(--pink)}.venue{min-height:700px;padding:80px 20px}.venue-card{padding:65px 25px}.rsvp-card{padding:65px 25px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<section class="opening" id="opening">
+  <div class="opening-inner">
+    <div class="opening-title">A little something for you <span class="title-star">★</span></div>
+    <div class="envelope-wrap" id="envelope" role="button" tabindex="0" aria-label="Open wedding invitation">
+      <div class="envelope">
+        <div class="envelope-back"></div><div class="liner"></div>
+        <div class="invite-card"><div class="card-inner">
+          <div class="card-small">Please join us</div>
+          <h2 class="card-names">Pierpaolo<em>&amp;</em>Emanuela</h2>
+          <div class="card-date">03 · 09 · 2027</div>
+        </div></div>
+        <div class="flap"></div><div class="env-left"></div><div class="env-right"></div><div class="env-bottom"></div>
+        <div class="seal">P + E</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+<section class="hero">
+  <svg class="doodle flower-one" viewBox="0 0 120 180"><path d="M60 175 C57 135 60 100 58 64"/><path d="M58 116 C31 103 25 125 53 136"/><path d="M60 143 C85 126 95 145 66 157"/><path d="M58 65 C35 61 27 42 40 35 C40 14 57 14 60 35 C67 14 84 19 79 39 C101 39 96 61 75 65 C72 84 51 82 58 65"/></svg>
+  <svg class="doodle lemon" viewBox="0 0 120 120"><ellipse cx="58" cy="67" rx="31" ry="40" transform="rotate(-25 58 67)"/><path d="M72 33 C78 15 97 15 101 24 C90 32 81 36 72 33"/></svg>
+  <svg class="doodle wine" viewBox="0 0 100 160"><path d="M26 20 L35 80 C38 98 63 98 67 80 L76 20 Z"/><path d="M51 96 L51 139"/><path d="M30 143 C43 139 59 139 72 143"/><path d="M34 65 C46 59 58 72 68 63"/></svg>
+  <svg class="doodle flower-two" viewBox="0 0 120 180"><path d="M58 176 C59 140 55 102 60 69"/><path d="M57 123 C33 112 26 131 51 142"/><path d="M59 100 C82 85 91 102 67 116"/><path d="M59 70 C38 63 31 44 45 39 C47 20 60 20 62 41 C74 21 88 31 80 48 C98 52 88 71 71 69 C67 85 52 85 59 70"/></svg>
+  <div class="hero-inner">
+    <h1>Pierpaolo<em>&amp;</em>Emanuela</h1>
+    <div class="invite-copy">invite you to the celebration of their wedding.<br>An evening of love and togetherness ♥ </div>
+    <div class="main-date">03 · 09 · 2027</div>
+    <div class="main-place">Casale Malatesta · Velletri · Italy</div>
+  </div>
+</section>
+
+<section class="paper-zone">
+  <article class="paper reveal">
+    <div class="paper-content"><div class="small-title">Save the date</div><h2 class="big-heading">More info<br><em>coming soon.</em></h2></div>
+    <svg class="doodle" style="width:130px;right:25px;top:20px;color:var(--green);transform:rotate(15deg);" viewBox="0 0 120 180"><path d="M60 175 C57 135 60 100 58 64"/><path d="M58 116 C31 103 25 125 53 136"/><path d="M60 143 C85 126 95 145 66 157"/><path d="M58 65 C35 61 27 42 40 35 C40 14 57 14 60 35 C67 14 84 19 79 39 C101 39 96 61 75 65 C72 84 51 82 58 65"/></svg>
+  </article>
+</section>
+
+<section class="checker"><div class="checker-note reveal">Come hungry.<br>Come thirsty.<br>Bring your dancing shoes.</div></section>
+
+<section class="venue">
+  <svg class="doodle" style="width:130px;top:7%;left:5%;color:var(--yellow);transform:rotate(-15deg);" viewBox="0 0 120 120"><ellipse cx="58" cy="67" rx="31" ry="40" transform="rotate(-25 58 67)"/><path d="M72 33 C78 15 97 15 101 24 C90 32 81 36 72 33"/></svg>
+  <div class="venue-card reveal">
+    <div class="small-title">Meet us here</div>
+    <h2>Under the<em>Italian sky.</em></h2>
+    <div class="venue-name">Casale Malatesta</div>
+    <div class="venue-location">Velletri · Italy</div>
+    <a class="map-link" href="https://www.google.com/maps/place/Casale+Malatesta/@41.6659753,12.8227601,17z/data=!4m18!1m8!3m7!1s0x132577f03a455963:0x736c2f9a6a9cda38!2sVia+Casale+di+Malatesta,+00049+Velletri+RM,+Italy!3b1!8m2!3d41.6659753!4d12.8227601!16s%2Fg%2F11b6gd5cvt!3m8!1s0x13257732ec90fb03:0x8ddfd0e89d26cc31!5m2!4m1!1i2!8m2!3d41.6661031!4d12.8247802!16s%2Fg%2F11lcmzgw0r?entry=ttu&amp;g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Show me the way ↗</a>
+  </div>
+</section>
+
+<section class="rsvp">
+  <div class="rsvp-card reveal">
+    <div class="rsvp-small">One very important question</div>
+    <h2>Will you<em>join us?</em></h2>
+    <div class="rsvp-text">We would love nothing more than to celebrate with you.</div>
+    <a class="rsvp-button" href="/rsvp">RSVP</a>
+  </div>
+</section>
+
+<footer><div class="footer-name">Pierpaolo + Emanuela</div><div class="footer-date">03 · 09 · 2027</div></footer>
+</main>
+
+<script>
+const opening=document.getElementById("opening");
+const envelope=document.getElementById("envelope");
+let hasOpened=false;
+function openInvitation(){
+  if(hasOpened)return;
+  hasOpened=true;
+  envelope.classList.add("open");
+  setTimeout(()=>{opening.classList.add("finished");},2300);
+}
+envelope.addEventListener("click",openInvitation);
+envelope.addEventListener("keydown",event=>{
+  if(event.key==="Enter"||event.key===" "){event.preventDefault();openInvitation();}
+});
+const revealElements=document.querySelectorAll(".reveal");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("visible");});
+},{threshold:.15});
+revealElements.forEach(element=>observer.observe(element));
+</script>
+</body>
+</html>
