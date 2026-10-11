@@ -44,7 +44,9 @@ a{font:inherit} ::selection{background:var(--yellow);color:var(--red)}
 .big-heading{margin:0;color:var(--red);font-family:"Instrument Serif",Georgia,serif;font-size:clamp(62px,11vw,110px);font-weight:400;line-height:.77;letter-spacing:-.045em} .big-heading em{color:var(--blue);font-weight:400}
 .checker{min-height:250px;display:grid;place-items:center;padding:50px 20px;background-color:var(--paper);background-image:linear-gradient(90deg,var(--green) 0 50%,transparent 50%),linear-gradient(var(--green) 0 50%,transparent 50%);background-size:90px 90px;background-position:0 0,45px 45px}
 .checker-note{max-width:480px;padding:28px 35px;background:var(--paper);border:2px solid var(--red);color:var(--red);text-align:center;font-family:"Instrument Serif",serif;font-size:32px;font-style:italic;transform:rotate(2deg)}
-.venue{position:relative;min-height:760px;display:grid;place-items:center;padding:100px 25px;overflow:hidden;background:var(--blue)} .venue-card{position:relative;z-index:2;width:min(720px,100%);padding:70px 50px;background:var(--yellow);border:2px solid var(--ink);text-align:center;transform:rotate(.7deg);box-shadow:-10px 12px 0 var(--red)}
+.venue{position:relative;min-height:760px;display:grid;place-items:center;padding:100px 25px;overflow:hidden;background:var(--blue) url("/static/assets/venue-starry-night.png") center/cover no-repeat}
+.venue::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(49,93,168,.12),rgba(24,59,50,.2)),linear-gradient(90deg,rgba(49,93,168,.25),rgba(233,183,180,.1));pointer-events:none}
+.venue-card{position:relative;z-index:2;width:min(720px,100%);padding:70px 50px;background:var(--yellow);border:2px solid var(--ink);text-align:center;transform:rotate(.7deg);box-shadow:-10px 12px 0 var(--red)}
 .venue-card h2{margin:0;color:var(--red);font-family:"Instrument Serif",serif;font-size:clamp(62px,10vw,100px);font-weight:400;line-height:.78} .venue-card h2 em{display:block;color:var(--green);font-weight:400}
 .venue-name{margin-top:45px;color:var(--blue);font-family:"Instrument Serif",serif;font-size:30px} .venue-location{margin-top:8px;font-size:9px;font-weight:600;letter-spacing:.26em;text-transform:uppercase}
 .map-link{display:inline-block;margin-top:35px;padding:14px 23px;background:var(--red);color:var(--paper);border:2px solid var(--red);text-decoration:none;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;transition:transform .2s,background .2s,color .2s} .map-link:hover{transform:rotate(-2deg);background:transparent;color:var(--red)}
@@ -102,7 +104,6 @@ footer{padding:80px 25px;background:var(--yellow);text-align:center} .footer-nam
 <section class="checker"><div class="checker-note reveal">Come hungry.<br>Come thirsty.<br>Bring your dancing shoes.</div></section>
 
 <section class="venue">
-  <svg class="doodle" style="width:130px;top:7%;left:5%;color:var(--yellow);transform:rotate(-15deg);" viewBox="0 0 120 120"><ellipse cx="58" cy="67" rx="31" ry="40" transform="rotate(-25 58 67)"/><path d="M72 33 C78 15 97 15 101 24 C90 32 81 36 72 33"/></svg>
   <div class="venue-card reveal">
     <div class="small-title">Meet us here</div>
     <h2>Under the<em>Italian sky.</em></h2>

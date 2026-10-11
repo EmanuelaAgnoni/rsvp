@@ -521,7 +521,9 @@
         "name": "Lucy",
         "status": "pending"
       }
-    ]
+    ],
+    "dietary": "",
+    "submitted_at": "2026-10-11T16:37:44.989630+00:00"
   },
   {
     "id": "marrets",
@@ -553,39 +555,21 @@
       {
         "name": "Michelle",
         "status": "pending"
-      }
-    ]
-  },
-  {
-    "id": "eryn-plus-one",
-    "label": "Eryn and plus one",
-    "type": "",
-    "side": "PP",
-    "category": "plus ones",
-    "guests": [
+      },
       {
         "name": "Eryn",
         "status": "pending"
       },
       {
-        "name": "plus one",
+        "name": "Eryn plus one",
         "status": "pending"
-      }
-    ]
-  },
-  {
-    "id": "isobel-plus-one",
-    "label": "Isobel and plus one",
-    "type": "",
-    "side": "",
-    "category": "plus ones",
-    "guests": [
+      },
       {
         "name": "Isobel",
         "status": "pending"
       },
       {
-        "name": "plus one",
+        "name": "Isobel plus one",
         "status": "pending"
       }
     ]
