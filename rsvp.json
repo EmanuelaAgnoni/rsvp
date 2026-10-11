@@ -1,0 +1,647 @@
+[
+  {
+    "id": "sara-cortiula",
+    "label": "Sara Cortiula",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Sara Cortiula",
+        "status": "pending"
+      }
+    ],
+    "dietary": "",
+    "submitted_at": "2026-10-11T16:30:41.465589+00:00"
+  },
+  {
+    "id": "giampaolo",
+    "label": "Giampaolo",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Giampaolo",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "fabrizio",
+    "label": "Fabrizio",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Fabrizio",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "nicoletta",
+    "label": "Nicoletta",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Nicoletta",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "piera-friend",
+    "label": "Piera",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Piera",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "maria",
+    "label": "Maria",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Maria",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "marianna",
+    "label": "Marianna",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Marianna",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "mary-luigi",
+    "label": "Mary and Luigi",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "plus ones",
+    "guests": [
+      {
+        "name": "Mary",
+        "status": "pending"
+      },
+      {
+        "name": "Luigi",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "lisa-marie-livia",
+    "label": "Lisa-Marie and Livia",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "plus ones",
+    "guests": [
+      {
+        "name": "Lisa-Marie",
+        "status": "pending"
+      },
+      {
+        "name": "Livia",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "wiktoria",
+    "label": "Wiktoria",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Wiktoria",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "katie",
+    "label": "Katie",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Katie",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "flo",
+    "label": "Flo",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Flo",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "sam",
+    "label": "Sam",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Sam",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "elisa",
+    "label": "Elisa",
+    "type": "",
+    "side": "",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Elisa",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "machi",
+    "label": "Machi",
+    "type": "",
+    "side": "",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Machi",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "abby-photographer",
+    "label": "Abby (Photographer)",
+    "type": "Friend",
+    "side": "Bean",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Abby (Photographer)",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "nico-ramona",
+    "label": "Nico and Ramona",
+    "type": "Friend",
+    "side": "PP",
+    "category": "plus ones",
+    "guests": [
+      {
+        "name": "Nico",
+        "status": "pending"
+      },
+      {
+        "name": "Ramona",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "sergio-mariya",
+    "label": "Sergio and Mariya",
+    "type": "Friend",
+    "side": "PP",
+    "category": "plus ones",
+    "guests": [
+      {
+        "name": "Sergio",
+        "status": "pending"
+      },
+      {
+        "name": "Mariya",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "javi-diego",
+    "label": "Javi and Diego",
+    "type": "Friend",
+    "side": "PP",
+    "category": "plus ones",
+    "guests": [
+      {
+        "name": "Javi",
+        "status": "pending"
+      },
+      {
+        "name": "Diego",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "raphael",
+    "label": "Raphael",
+    "type": "Friend",
+    "side": "PP",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Raphael",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "viktor",
+    "label": "Viktor",
+    "type": "Friend",
+    "side": "PP",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Viktor",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "franzi",
+    "label": "Franzi",
+    "type": "Friend",
+    "side": "PP",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Franzi",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "tragi",
+    "label": "Tragi",
+    "type": "Friend",
+    "side": "PP",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Tragi",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "pedro",
+    "label": "Pedro",
+    "type": "Friend",
+    "side": "PP",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Pedro",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "eli",
+    "label": "Eli",
+    "type": "Friend",
+    "side": "PP",
+    "category": "Single",
+    "guests": [
+      {
+        "name": "Eli",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "beans",
+    "label": "Beans",
+    "type": "Family",
+    "side": "Bean",
+    "category": "Beans",
+    "guests": [
+      {
+        "name": "Virginia",
+        "status": "pending"
+      },
+      {
+        "name": "Erasmo",
+        "status": "pending"
+      },
+      {
+        "name": "Teresa",
+        "status": "pending"
+      },
+      {
+        "name": "Giovanni",
+        "status": "pending"
+      },
+      {
+        "name": "papa' Erasmo",
+        "status": "pending"
+      },
+      {
+        "name": "mamma Erasmo",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "piera-paolo",
+    "label": "Piera and Paolo",
+    "type": "Family",
+    "side": "Bean",
+    "category": "plus ones",
+    "guests": [
+      {
+        "name": "Piera",
+        "status": "pending"
+      },
+      {
+        "name": "Paolo",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "polli",
+    "label": "Polli",
+    "type": "Family",
+    "side": "PP",
+    "category": "Polli",
+    "guests": [
+      {
+        "name": "Margaret",
+        "status": "pending"
+      },
+      {
+        "name": "Pierino",
+        "status": "pending"
+      },
+      {
+        "name": "Aurelia",
+        "status": "pending"
+      },
+      {
+        "name": "Stiky",
+        "status": "pending"
+      },
+      {
+        "name": "Caterina",
+        "status": "pending"
+      },
+      {
+        "name": "Maxim",
+        "status": "pending"
+      },
+      {
+        "name": "Eugenio",
+        "status": "pending"
+      },
+      {
+        "name": "Dakota",
+        "status": "pending"
+      },
+      {
+        "name": "Lenny",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "lucarelli",
+    "label": "Lucarelli",
+    "type": "Family",
+    "side": "PP",
+    "category": "Lucarelli",
+    "guests": [
+      {
+        "name": "Zia Franca",
+        "status": "pending"
+      },
+      {
+        "name": "Luca",
+        "status": "pending"
+      },
+      {
+        "name": "Silvia",
+        "status": "pending"
+      },
+      {
+        "name": "Tommaso",
+        "status": "pending"
+      },
+      {
+        "name": "Stefania",
+        "status": "pending"
+      },
+      {
+        "name": "Mariano",
+        "status": "pending"
+      },
+      {
+        "name": "Andrea",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "reads",
+    "label": "Reads",
+    "type": "Family",
+    "side": "PP",
+    "category": "Reads",
+    "guests": [
+      {
+        "name": "Cathy",
+        "status": "pending"
+      },
+      {
+        "name": "Ken",
+        "status": "pending"
+      },
+      {
+        "name": "Eve",
+        "status": "pending"
+      },
+      {
+        "name": "Andy",
+        "status": "pending"
+      },
+      {
+        "name": "Mat",
+        "status": "pending"
+      },
+      {
+        "name": "Sarah",
+        "status": "pending"
+      },
+      {
+        "name": "Elly",
+        "status": "pending"
+      },
+      {
+        "name": "Josh",
+        "status": "pending"
+      },
+      {
+        "name": "Lucy",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "marrets",
+    "label": "Marrets",
+    "type": "Family",
+    "side": "PP",
+    "category": "Marrets",
+    "guests": [
+      {
+        "name": "Veronica",
+        "status": "pending"
+      },
+      {
+        "name": "Allan",
+        "status": "pending"
+      },
+      {
+        "name": "Sarah",
+        "status": "pending"
+      },
+      {
+        "name": "Mark",
+        "status": "pending"
+      },
+      {
+        "name": "Anthony",
+        "status": "pending"
+      },
+      {
+        "name": "Michelle",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "eryn-plus-one",
+    "label": "Eryn and plus one",
+    "type": "",
+    "side": "PP",
+    "category": "plus ones",
+    "guests": [
+      {
+        "name": "Eryn",
+        "status": "pending"
+      },
+      {
+        "name": "plus one",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "isobel-plus-one",
+    "label": "Isobel and plus one",
+    "type": "",
+    "side": "",
+    "category": "plus ones",
+    "guests": [
+      {
+        "name": "Isobel",
+        "status": "pending"
+      },
+      {
+        "name": "plus one",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "clennell",
+    "label": "Clennell",
+    "type": "Family",
+    "side": "PP",
+    "category": "Clennell",
+    "guests": [
+      {
+        "name": "Aunt maisy",
+        "status": "pending"
+      },
+      {
+        "name": "Jim",
+        "status": "pending"
+      },
+      {
+        "name": "Tina",
+        "status": "pending"
+      },
+      {
+        "name": "David",
+        "status": "pending"
+      },
+      {
+        "name": "Julia",
+        "status": "pending"
+      },
+      {
+        "name": "Edwin",
+        "status": "pending"
+      },
+      {
+        "name": "Lydie",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "maureen-eve",
+    "label": "Maureen and Eve",
+    "type": "Family",
+    "side": "PP",
+    "category": "plus ones",
+    "guests": [
+      {
+        "name": "Maureen",
+        "status": "pending"
+      },
+      {
+        "name": "Eve",
+        "status": "pending"
+      }
+    ]
+  }
+]

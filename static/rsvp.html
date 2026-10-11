@@ -74,6 +74,20 @@ button,input,textarea{font:inherit} ::selection{background:var(--pink);color:var
 
 .choice.selected{background:var(--green);border-color:var(--green);color:var(--paper)}
 
+.guest-list{display:grid;gap:14px;width:min(560px,100%);margin:0 auto;text-align:left}
+
+.guest-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(39,139,106,.35)}
+
+.guest-name{color:var(--ink);font-family:"Instrument Serif",Georgia,serif;font-size:28px;line-height:1.05}
+
+.status-options{display:flex;gap:7px}
+
+.status-choice{appearance:none;border:2px solid var(--green);background:transparent;color:var(--green);padding:10px 12px;cursor:pointer;font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:transform .2s,background .2s,color .2s,border-color .2s}
+
+.status-choice:hover{transform:rotate(-1.5deg);border-color:var(--red);color:var(--red)}
+
+.status-choice.selected{background:var(--green);color:var(--paper)}
+
 .field{width:min(500px,100%);margin:0 auto;display:block;border:0;border-bottom:2px solid var(--green);border-radius:0;outline:none;background:transparent;color:var(--ink);padding:12px 5px;text-align:center;font-family:"Instrument Serif",Georgia,serif;font-size:28px}
 
 textarea.field{min-height:120px;resize:vertical;border:2px solid var(--green);padding:16px;text-align:left;font-size:21px}
@@ -87,6 +101,8 @@ textarea.field{min-height:120px;resize:vertical;border:2px solid var(--green);pa
 .prev:hover{color:var(--red)}
 
 .error{min-height:20px;margin-top:18px;color:var(--red);font-size:11px}
+
+.loading{color:var(--blue);font-family:"Instrument Serif",Georgia,serif;font-size:24px;font-style:italic;text-align:center}
 
 .finish{display:none;text-align:center}
 
@@ -102,7 +118,7 @@ textarea.field{min-height:120px;resize:vertical;border:2px solid var(--green);pa
 
 .note{max-width:560px;margin:30px auto 0;text-align:center;color:var(--green);font-size:10px;line-height:1.5}
 
-@media(max-width:650px){.page{padding:75px 16px 55px}.back{top:20px;left:18px}.title{margin-bottom:32px}.card{min-height:500px;padding:58px 24px 45px;box-shadow:7px 8px 0 var(--pink)}.question{font-size:clamp(40px,13vw,62px)}.lemon,.flower{width:75px;opacity:.8}.actions{flex-wrap:wrap}}
+@media(max-width:650px){.page{padding:75px 16px 55px}.back{top:20px;left:18px}.title{margin-bottom:32px}.card{min-height:500px;padding:58px 24px 45px;box-shadow:7px 8px 0 var(--pink)}.question{font-size:clamp(40px,13vw,62px)}.guest-row{grid-template-columns:1fr}.status-options{display:grid;grid-template-columns:repeat(3,1fr)}.status-choice{padding:11px 7px}.lemon,.flower{width:75px;opacity:.8}.actions{flex-wrap:wrap}}
 
 </style>
 
@@ -142,11 +158,13 @@ textarea.field{min-height:120px;resize:vertical;border:2px solid var(--green);pa
 
           <div class="question-number">01 · Your party</div>
 
-          <h2 class="question">What is your name?</h2>
+          <h2 class="question" id="partyTitle">Your RSVP</h2>
 
-          <p class="helper">Please enter multiple names if you are with family.</p>
+          <p class="helper">Please set a response for each guest in your party.</p>
 
-          <input class="field" name="name" id="name" autocomplete="name" placeholder="Name(s)">
+          <div class="loading" id="loading">Loading your party...</div>
+
+          <div class="guest-list" id="guestList"></div>
 
           <div class="error"></div>
 
@@ -158,37 +176,7 @@ textarea.field{min-height:120px;resize:vertical;border:2px solid var(--green);pa
 
         <div class="step" data-step="1">
 
-          <div class="question-number">02 · The important bit</div>
-
-          <h2 class="question">Are you attending the wedding?</h2>
-
-          <div class="choices">
-
-            <button class="choice" type="button" data-field="attendance" data-value="Yes">Yes ♥</button>
-
-            <button class="choice" type="button" data-field="attendance" data-value="No">No</button>
-
-          </div>
-
-          <input type="hidden" name="attendance" id="attendance">
-
-          <div class="error"></div>
-
-          <div class="actions">
-
-            <button class="prev" type="button">← Back</button>
-
-            <button class="next" id="attendanceNext" type="button">Next →</button>
-
-          </div>
-
-        </div>
-
-
-
-        <div class="step" data-step="2">
-
-          <div class="question-number">03 · Food</div>
+          <div class="question-number">02 · Food</div>
 
           <h2 class="question">Any dietary requirements or allergies?</h2>
 
@@ -231,196 +219,154 @@ textarea.field{min-height:120px;resize:vertical;border:2px solid var(--green);pa
 
 
 <script>
-
 const steps=[...document.querySelectorAll(".step")];
-
 const progress=document.getElementById("progress");
-
 const form=document.getElementById("rsvpForm");
-
 const finish=document.getElementById("finish");
-
+const guestList=document.getElementById("guestList");
+const loading=document.getElementById("loading");
+const partyTitle=document.getElementById("partyTitle");
+const invitePath=location.pathname.replace(/^\/|\/$/g, "");
+const inviteName=decodeURIComponent(invitePath.replace(/^rsvp\/?/, ""));
 let current=0;
-
-
+let rsvpGroup=null;
+let submitting=false;
 
 steps.forEach(()=>progress.appendChild(document.createElement("span")));
 
-
-
 function render(){
-
-  steps.forEach((step,i)=>step.classList.toggle("active",i===current));
-
-  [...progress.children].forEach((dot,i)=>dot.classList.toggle("active",i<=current));
-
-  window.scrollTo({top:0,behavior:"smooth"});
-
+  steps.forEach((step,i)=>step.classList.toggle("active",i===current));
+  [...progress.children].forEach((dot,i)=>dot.classList.toggle("active",i<=current));
 }
 
+function renderGuests(){
+  guestList.textContent="";
+  if(!rsvpGroup)return;
 
+  partyTitle.textContent=rsvpGroup.label;
+  rsvpGroup.guests.forEach((guest,index)=>{
+    const row=document.createElement("div");
+    row.className="guest-row";
 
-document.querySelectorAll(".choice").forEach(button=>{
+    const name=document.createElement("div");
+    name.className="guest-name";
+    name.textContent=guest.name;
+    row.appendChild(name);
 
-  button.addEventListener("click",()=>{
+    const options=document.createElement("div");
+    options.className="status-options";
 
-    const field=button.dataset.field;
+    ["pending","yes","no"].forEach(status=>{
+      const button=document.createElement("button");
+      button.className=`status-choice${guest.status===status?" selected":""}`;
+      button.type="button";
+      button.textContent=status==="yes"?"Yes":status==="no"?"No":"Pending";
+      button.addEventListener("click",()=>{
+        rsvpGroup.guests[index].status=status;
+        renderGuests();
+      });
+      options.appendChild(button);
+    });
 
-    document.getElementById(field).value=button.dataset.value;
+    row.appendChild(options);
+    guestList.appendChild(row);
+  });
+}
 
-    document.querySelectorAll(`[data-field="${field}"]`).forEach(b=>b.classList.remove("selected"));
+async function loadGroup(){
+  if(!inviteName){
+    loading.textContent="Please use your personal RSVP link.";
+    form.querySelector(".next").disabled=true;
+    return;
+  }
 
-    button.classList.add("selected");
-
-
-
-    if(field==="attendance"){
-
-      document.getElementById("attendanceNext").textContent=
-
-        button.dataset.value==="No"?"Submit RSVP ♥":"Next →";
-
-    }
-
-  });
-
-});
-
-
+  try{
+    const response=await fetch(`/api/rsvp/${encodeURIComponent(inviteName)}`);
+    if(!response.ok)throw new Error("RSVP group not found");
+    rsvpGroup=await response.json();
+    loading.style.display="none";
+    renderGuests();
+  }catch(err){
+    console.error(err);
+    loading.textContent="We could not find this RSVP link.";
+    form.querySelector(".next").disabled=true;
+  }
+}
 
 function error(message){
-
-  steps[current].querySelector(".error").textContent=message;
-
-  return false;
-
+  steps[current].querySelector(".error").textContent=message;
+  return false;
 }
-
-
 
 function validate(){
-
-  steps[current].querySelector(".error").textContent="";
-
-  if(current===0 && !document.getElementById("name").value.trim())
-
-    return error("Please enter your name.");
-
-  if(current===1 && !document.getElementById("attendance").value)
-
-    return error("Please choose yes or no.");
-
-  return true;
-
+  steps[current].querySelector(".error").textContent="";
+  if(current===0 && (!rsvpGroup || !rsvpGroup.guests.length)){
+    return error("Please use your personal RSVP link.");
+  }
+  return true;
 }
 
+async function submitRSVP(){
+  if(submitting)return;
+  submitting=true;
+  const buttons=form.querySelectorAll("button");
+  buttons.forEach(button=>button.disabled=true);
+  steps[current].querySelector(".error").textContent="";
 
-
-let submitting = false;
-
-async function submitRSVP() {
-  if (submitting) return;
-  submitting = true;
-  const buttons = form.querySelectorAll('button');
-  buttons.forEach(button => button.disabled = true);
-  steps[current].querySelector('.error').textContent = '';
-
-  try {
-    const response = await fetch('/api/rsvp', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: document.getElementById('name').value.trim(),
-        attending: document.getElementById('attendance').value.toLowerCase(),
-        dietary: document.getElementById('attendance').value === 'Yes'
-          ? document.getElementById('dietary').value.trim()
-          : ''
+  try{
+    const response=await fetch(`/api/rsvp/${encodeURIComponent(inviteName)}`, {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        guests:rsvpGroup.guests.map(guest=>({
+          name:guest.name,
+          status:guest.status
+        })),
+        dietary:document.getElementById("dietary").value.trim()
       })
     });
-    if (!response.ok) throw new Error('RSVP save failed');
+    if(!response.ok)throw new Error("RSVP save failed");
     complete();
-  } catch (err) {
+  }catch(err){
     console.error(err);
-    steps[current].querySelector('.error').textContent =
-      'Unable to save your RSVP. Please try again.';
-  } finally {
-    submitting = false;
-    buttons.forEach(button => button.disabled = false);
+    steps[current].querySelector(".error").textContent=
+      "Unable to save your RSVP. Please try again.";
+  }finally{
+    submitting=false;
+    buttons.forEach(button=>button.disabled=false);
   }
 }
 
 function complete(){
-
-  form.style.display="none";
-
-  progress.style.display="none";
-
-  finish.classList.add("active");
-
+  form.style.display="none";
+  progress.style.display="none";
+  finish.classList.add("active");
 }
 
-
-
 document.querySelectorAll(".next").forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    if(!validate())return;
-
-
-
-    // A "No" attendance response ends the RSVP immediately.
-
-    if(current===1 && document.getElementById("attendance").value==="No"){
-
-      submitRSVP();
-
-      return;
-
-    }
-
-
-
-    if(current<steps.length-1){
-
-      current++;
-
-      render();
-
-    }
-
-  });
-
+  button.addEventListener("click",()=>{
+    if(!validate())return;
+    if(current<steps.length-1){
+      current++;
+      render();
+    }
+  });
 });
-
-
 
 document.querySelectorAll(".prev").forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    if(current>0){current--;render();}
-
-  });
-
+  button.addEventListener("click",()=>{
+    if(current>0){current--;render();}
+  });
 });
-
-
 
 form.addEventListener("submit",event=>{
-
-  event.preventDefault();
-
-  if(!validate())return;
-
-  submitRSVP();
-
+  event.preventDefault();
+  if(!validate())return;
+  submitRSVP();
 });
 
-
-
 render();
-
+loadGroup();
 </script>
 
 </body>

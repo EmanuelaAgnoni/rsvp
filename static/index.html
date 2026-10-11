@@ -117,7 +117,7 @@ footer{padding:80px 25px;background:var(--yellow);text-align:center} .footer-nam
     <div class="rsvp-small">One very important question</div>
     <h2>Will you<em>join us?</em></h2>
     <div class="rsvp-text">We would love nothing more than to celebrate with you.</div>
-    <a class="rsvp-button" href="/rsvp">RSVP</a>
+    <a class="rsvp-button" id="rsvpButton" href="/rsvp">RSVP</a>
   </div>
 </section>
 
@@ -127,7 +127,12 @@ footer{padding:80px 25px;background:var(--yellow);text-align:center} .footer-nam
 <script>
 const opening=document.getElementById("opening");
 const envelope=document.getElementById("envelope");
+const rsvpButton=document.getElementById("rsvpButton");
+const invitePath=location.pathname.replace(/^\/|\/$/g, "");
 let hasOpened=false;
+if(invitePath){
+  rsvpButton.href=`/rsvp/${encodeURIComponent(invitePath)}`;
+}
 function openInvitation(){
   if(hasOpened)return;
   hasOpened=true;

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSVP Admin</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+:root{--bg:#f5ebdd;--paper:#fff8ed;--red:#e94a2b;--green:#278b6a;--yellow:#e9d85a;--pink:#e9b7b4;--blue:#315da8;--ink:#183b32;--line:rgba(24,59,50,.18)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif}
+main{width:min(1180px,100%);margin:0 auto;padding:38px 22px 60px}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:24px}
+h1{margin:0;color:var(--red);font-size:42px;line-height:1;font-weight:700}
+.updated{color:var(--blue);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.stat,.panel{background:var(--paper);border:2px solid var(--green);box-shadow:5px 6px 0 var(--pink)}
+.stat{padding:18px}
+.stat span{display:block;color:var(--blue);font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.stat strong{display:block;margin-top:10px;color:var(--red);font-size:38px;line-height:1}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.panel{padding:18px}
+.panel h2{margin:0 0 14px;color:var(--green);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.mini-row{display:grid;grid-template-columns:1fr repeat(3,70px);gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:13px}
+.mini-row:first-of-type{border-top:0}
+.mini-row strong{font-weight:700}
+.mini-row span:not(:first-child){text-align:right}
+.groups{display:grid;gap:13px}
+.group{background:var(--paper);border:2px solid var(--green);box-shadow:5px 6px 0 var(--pink);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+.group:hover,.group:focus{outline:none;transform:translate(-2px,-2px);box-shadow:7px 8px 0 var(--pink)}
+.group-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.group-title{min-width:0}
+.group-title h2{margin:0;color:var(--red);font-size:20px;line-height:1.15}
+.meta{margin-top:5px;color:var(--blue);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.counts{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-width:34px;padding:6px 8px;border:1px solid var(--green);font-size:11px;font-weight:700;text-transform:uppercase}
+.yes{background:var(--green);color:var(--paper)}
+.no{background:var(--red);border-color:var(--red);color:var(--paper)}
+.pending{background:var(--yellow);color:var(--ink)}
+.guest-table{width:100%;border-collapse:collapse}
+.guest-table td{padding:12px 18px;border-top:1px solid var(--line);font-size:14px}
+.guest-table tr:first-child td{border-top:0}
+.guest-table td:last-child{text-align:right}
+.dietary{padding:0 18px 16px;color:var(--blue);font-size:13px;line-height:1.45}
+.empty,.error{padding:30px;background:var(--paper);border:2px solid var(--red);color:var(--red);text-align:center;font-weight:700}
+@media(max-width:760px){main{padding:26px 14px 42px}.top{display:block}.updated{margin-top:12px}.grid,.panels{grid-template-columns:1fr}.group-head{display:block}.counts{justify-content:flex-start;margin-top:12px}.mini-row{grid-template-columns:1fr repeat(3,52px)}.guest-table td{padding:11px 12px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <h1>RSVP Admin</h1>
+    <div class="updated" id="updated">Loading...</div>
+  </div>
+
+  <section class="grid" id="stats"></section>
+  <section class="panels">
+    <div class="panel"><h2>By side</h2><div id="bySide"></div></div>
+    <div class="panel"><h2>By type</h2><div id="byType"></div></div>
+  </section>
+  <section class="groups" id="groups"></section>
+</main>
+
+<script>
+const stats=document.getElementById("stats");
+const bySide=document.getElementById("bySide");
+const byType=document.getElementById("byType");
+const groupsEl=document.getElementById("groups");
+const updated=document.getElementById("updated");
+
+function statusCounts(guests){
+  return guests.reduce((counts,guest)=>{
+    const status=guest.status||"pending";
+    counts[status]=(counts[status]||0)+1;
+    return counts;
+  },{pending:0,yes:0,no:0});
+}
+
+function renderStats(totals){
+  const items=[
+    ["Total guests", totals.total],
+    ["Accepted", totals.yes],
+    ["Declined", totals.no],
+    ["Pending", totals.pending]
+  ];
+  stats.innerHTML=items.map(([label,value])=>`
+    <article class="stat"><span>${label}</span><strong>${value}</strong></article>
+  `).join("");
+}
+
+function renderBreakdown(target, data){
+  const names=Object.keys(data).sort();
+  target.innerHTML=names.map(name=>`
+    <div class="mini-row">
+      <strong>${name}</strong>
+      <span>Yes ${data[name].yes}</span>
+      <span>No ${data[name].no}</span>
+      <span>Wait ${data[name].pending}</span>
+    </div>
+  `).join("");
+}
+
+function renderGroups(groups){
+  if(!groups.length){
+    groupsEl.innerHTML='<div class="empty">No RSVP groups found.</div>';
+    return;
+  }
+
+  groupsEl.innerHTML=groups.map(group=>{
+    const counts=statusCounts(group.guests||[]);
+    const guests=(group.guests||[]).map(guest=>`
+      <tr>
+        <td>${guest.name}</td>
+        <td><span class="chip ${guest.status||"pending"}">${guest.status||"pending"}</span></td>
+      </tr>
+    `).join("");
+    const dietary=group.dietary?`<div class="dietary"><strong>Dietary:</strong> ${group.dietary}</div>`:"";
+    const submitted=group.submitted_at?` · Updated ${new Date(group.submitted_at).toLocaleString()}`:"";
+
+    return `
+      <article class="group" tabindex="0" role="link" data-url="/${group.id}" aria-label="Open RSVP page for ${group.label}">
+        <div class="group-head">
+          <div class="group-title">
+            <h2>${group.label}</h2>
+            <div class="meta">${group.type||"Unassigned"} · ${group.side||"Unassigned"} · ${group.category||"Unassigned"}${submitted}</div>
+          </div>
+          <div class="counts">
+            <span class="chip yes">Yes ${counts.yes}</span>
+            <span class="chip no">No ${counts.no}</span>
+            <span class="chip pending">Pending ${counts.pending}</span>
+          </div>
+        </div>
+        <table class="guest-table"><tbody>${guests}</tbody></table>
+        ${dietary}
+      </article>
+    `;
+  }).join("");
+}
+
+async function loadAdmin(){
+  try{
+    const response=await fetch("/api/admin");
+    if(!response.ok)throw new Error("Unable to load admin data");
+    const data=await response.json();
+    renderStats(data.totals);
+    renderBreakdown(bySide,data.by_side);
+    renderBreakdown(byType,data.by_type);
+    renderGroups(data.groups);
+    updated.textContent=`Updated ${new Date().toLocaleTimeString()}`;
+  }catch(err){
+    console.error(err);
+    updated.textContent="Unable to load";
+    groupsEl.innerHTML='<div class="error">Unable to load RSVP data.</div>';
+  }
+}
+
+loadAdmin();
+
+groupsEl.addEventListener("click",event=>{
+  const group=event.target.closest(".group");
+  if(group)window.open(group.dataset.url,"_blank","noopener");
+});
+
+groupsEl.addEventListener("keydown",event=>{
+  if(event.key!=="Enter"&&event.key!==" ")return;
+  const group=event.target.closest(".group");
+  if(!group)return;
+  event.preventDefault();
+  window.open(group.dataset.url,"_blank","noopener");
+});
+</script>
+</body>
+</html>
