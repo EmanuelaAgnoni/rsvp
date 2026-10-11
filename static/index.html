@@ -50,13 +50,17 @@ a{font:inherit} ::selection{background:var(--yellow);color:var(--red)}
 .venue-card h2{margin:0;color:var(--red);font-family:"Instrument Serif",serif;font-size:clamp(62px,10vw,100px);font-weight:400;line-height:.78} .venue-card h2 em{display:block;color:var(--green);font-weight:400}
 .venue-name{margin-top:45px;color:var(--blue);font-family:"Instrument Serif",serif;font-size:30px} .venue-location{margin-top:8px;font-size:9px;font-weight:600;letter-spacing:.26em;text-transform:uppercase}
 .map-link{display:inline-block;margin-top:35px;padding:14px 23px;background:var(--red);color:var(--paper);border:2px solid var(--red);text-decoration:none;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;transition:transform .2s,background .2s,color .2s} .map-link:hover{transform:rotate(-2deg);background:transparent;color:var(--red)}
-.rsvp{position:relative;min-height:100svh;display:grid;place-items:center;padding:100px 25px;overflow:hidden;background:var(--pink)} .rsvp-card{position:relative;z-index:2;width:min(650px,100%);padding:70px 45px;background:var(--paper);border:2px solid var(--green);text-align:center;box-shadow:10px 10px 0 var(--green);transform:rotate(-.6deg)}
+.rsvp{position:relative;min-height:100svh;display:grid;place-items:center;padding:100px 25px;overflow:hidden;background:var(--pink)}
+.rsvp-inner{position:relative;z-index:2;width:min(1040px,100%);display:grid;grid-template-columns:minmax(260px,390px) minmax(0,650px);align-items:center;justify-content:center;gap:42px}
+.rsvp-photo{margin:0;aspect-ratio:4/5;overflow:hidden;border:2px solid var(--green);background:var(--paper);box-shadow:-10px 11px 0 var(--yellow);transform:rotate(2.4deg)}
+.rsvp-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center bottom}
+.rsvp-card{position:relative;z-index:2;width:100%;padding:70px 45px;background:var(--paper);border:2px solid var(--green);text-align:center;box-shadow:10px 10px 0 var(--green);transform:rotate(-.6deg)}
 .rsvp-small{color:var(--blue);font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase} .rsvp-card h2{margin:27px 0 0;color:var(--red);font-family:"Instrument Serif",serif;font-size:clamp(70px,13vw,125px);font-weight:400;line-height:.72} .rsvp-card h2 em{display:block;color:var(--green);font-size:.7em;font-weight:400}
 .rsvp-text{max-width:380px;margin:45px auto 32px;color:var(--blue);font-family:"Instrument Serif",serif;font-size:20px;font-style:italic;line-height:1.45}
 .rsvp-button{display:inline-block;padding:17px 28px;background:var(--red);color:var(--paper);border:2px solid var(--red);text-decoration:none;font-size:9px;font-weight:600;letter-spacing:.27em;text-transform:uppercase;transition:transform .2s,background .2s,color .2s} .rsvp-button:hover{transform:rotate(2deg);background:var(--yellow);color:var(--red)}
 footer{padding:80px 25px;background:var(--yellow);text-align:center} .footer-name{color:var(--red);font-family:"Instrument Serif",serif;font-size:42px;font-style:italic} .footer-date{margin-top:14px;color:var(--blue);font-size:9px;font-weight:600;letter-spacing:.27em;text-transform:uppercase}
 .reveal{opacity:0;transform:translateY(30px) rotate(.4deg);transition:opacity .9s ease,transform .9s ease} .reveal.visible{opacity:1;transform:translateY(0) rotate(0)}
-@media(max-width:700px){.opening-inner{width:90vw}.opening-title{margin-bottom:55px}.hero{padding:100px 22px 85px}.hero h1{font-size:clamp(67px,21vw,105px)}.invite-copy{max-width:330px;font-size:19px}.doodle{opacity:.85}.flower-one,.flower-two{width:80px}.lemon,.wine{width:65px}.paper-zone{padding:70px 16px}.paper{min-height:470px;padding:65px 28px;box-shadow:7px 8px 0 var(--pink)}.venue{min-height:700px;padding:80px 20px}.venue-card{padding:65px 25px}.rsvp-card{padding:65px 25px}}
+@media(max-width:700px){.opening-inner{width:90vw}.opening-title{margin-bottom:55px}.hero{padding:100px 22px 85px}.hero h1{font-size:clamp(67px,21vw,105px)}.invite-copy{max-width:330px;font-size:19px}.doodle{opacity:.85}.flower-one,.flower-two{width:80px}.lemon,.wine{width:65px}.paper-zone{padding:70px 16px}.paper{min-height:470px;padding:65px 28px;box-shadow:7px 8px 0 var(--pink)}.venue{min-height:700px;padding:80px 20px}.venue-card{padding:65px 25px}.rsvp{padding:75px 18px}.rsvp-inner{grid-template-columns:1fr;gap:30px}.rsvp-photo{width:min(330px,100%);justify-self:center;box-shadow:-7px 8px 0 var(--yellow)}.rsvp-card{padding:65px 25px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -114,11 +118,16 @@ footer{padding:80px 25px;background:var(--yellow);text-align:center} .footer-nam
 </section>
 
 <section class="rsvp">
-  <div class="rsvp-card reveal">
-    <div class="rsvp-small">One very important question</div>
-    <h2>Will you<em>join us?</em></h2>
-    <div class="rsvp-text">We would love nothing more than to celebrate with you.</div>
-    <a class="rsvp-button" id="rsvpButton" href="/rsvp">RSVP</a>
+  <div class="rsvp-inner">
+    <figure class="rsvp-photo reveal">
+      <img src="/static/assets/casale-malatesta.jpg" alt="Casale Malatesta venue in the Italian countryside">
+    </figure>
+    <div class="rsvp-card reveal">
+      <div class="rsvp-small">One very important question</div>
+      <h2>Will you<em>join us?</em></h2>
+      <div class="rsvp-text">We would love nothing more than to celebrate with you.</div>
+      <a class="rsvp-button" id="rsvpButton" href="/rsvp">RSVP</a>
+    </div>
   </div>
 </section>
 
