@@ -226,6 +226,8 @@ const finish=document.getElementById("finish");
 const guestList=document.getElementById("guestList");
 const loading=document.getElementById("loading");
 const partyTitle=document.getElementById("partyTitle");
+const nextButton=form.querySelector(".next");
+const nextActions=nextButton.closest(".actions");
 const invitePath=location.pathname.replace(/^\/|\/$/g, "");
 const inviteName=decodeURIComponent(invitePath.replace(/^rsvp\/?/, ""));
 let current=0;
@@ -275,8 +277,9 @@ function renderGuests(){
 
 async function loadGroup(){
   if(!inviteName){
-    loading.textContent="Please use your personal RSVP link.";
-    form.querySelector(".next").disabled=true;
+    loading.textContent="Please use your personal RSVP link. You should have received a message from Pierpaolo and Emanuela with your link.";
+    nextButton.disabled=true;
+    nextActions.style.display="none";
     return;
   }
 
@@ -285,11 +288,14 @@ async function loadGroup(){
     if(!response.ok)throw new Error("RSVP group not found");
     rsvpGroup=await response.json();
     loading.style.display="none";
+    nextButton.disabled=false;
+    nextActions.style.display="";
     renderGuests();
   }catch(err){
     console.error(err);
     loading.textContent="We could not find this RSVP link.";
-    form.querySelector(".next").disabled=true;
+    nextButton.disabled=true;
+    nextActions.style.display="none";
   }
 }
 
