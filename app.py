@@ -41,18 +41,7 @@ def save_rsvp_groups(groups):
 def find_rsvp_group(groups, invite_name):
     requested = slugify(invite_name)
     for group in groups:
-        group_slugs = {
-            slugify(group.get("id", "")),
-            slugify(group.get("label", "")),
-            slugify(group.get("category", "")),
-        }
-        group_slugs.update(
-            slugify(guest.get("name", ""))
-            for guest in group.get("guests", [])
-            if isinstance(guest, dict)
-        )
-
-        if requested in group_slugs:
+        if requested == slugify(group.get("id", "")):
             return group
 
     return None
@@ -87,6 +76,9 @@ def build_admin_summary(groups):
         "groups": groups,
     }
 
+def not_found_page():
+    return send_from_directory("static", "404.html"), 404
+
 @app.route("/")
 def home():
     print("home")
@@ -98,6 +90,9 @@ def rsvp_page():
 
 @app.route("/rsvp/<path:invite_name>")
 def named_rsvp_page(invite_name):
+    if find_rsvp_group(load_rsvp_groups(), invite_name) is None:
+        return not_found_page()
+
     return send_from_directory("static", "rsvp.html")
 
 @app.route("/admin")
@@ -174,9 +169,16 @@ def save_rsvp():
 @app.route("/<path:invite_name>")
 def root_named_rsvp_page(invite_name):
     if find_rsvp_group(load_rsvp_groups(), invite_name) is None:
-        return send_from_directory("static", "index.html"), 404
+        return not_found_page()
 
     return send_from_directory("static", "index.html")
+
+@app.errorhandler(404)
+def handle_not_found(error):
+    if request.path.startswith("/api/"):
+        return jsonify(error="Not found"), 404
+
+    return not_found_page()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

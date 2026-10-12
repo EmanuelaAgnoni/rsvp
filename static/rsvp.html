@@ -226,6 +226,7 @@ const finish=document.getElementById("finish");
 const guestList=document.getElementById("guestList");
 const loading=document.getElementById("loading");
 const partyTitle=document.getElementById("partyTitle");
+const partyHelper=document.querySelector('[data-step="0"] .helper');
 const nextButton=form.querySelector(".next");
 const nextActions=nextButton.closest(".actions");
 const invitePath=location.pathname.replace(/^\/|\/$/g, "");
@@ -246,6 +247,7 @@ function renderGuests(){
   if(!rsvpGroup)return;
 
   partyTitle.textContent=rsvpGroup.label;
+  partyHelper.textContent="Please set a response for each guest in your party.";
   rsvpGroup.guests.forEach((guest,index)=>{
     const row=document.createElement("div");
     row.className="guest-row";
@@ -275,11 +277,18 @@ function renderGuests(){
   });
 }
 
+function showPersonalLinkMessage(){
+  partyTitle.textContent="Use your personal RSVP link";
+  partyHelper.textContent="You should have received a message from Pierpaolo and Emanuela with your link.";
+  loading.textContent="Please open that personal RSVP link to respond.";
+  guestList.textContent="";
+  nextButton.disabled=true;
+  nextActions.style.display="none";
+}
+
 async function loadGroup(){
   if(!inviteName){
-    loading.textContent="Please use your personal RSVP link. You should have received a message from Pierpaolo and Emanuela with your link.";
-    nextButton.disabled=true;
-    nextActions.style.display="none";
+    showPersonalLinkMessage();
     return;
   }
 
@@ -293,9 +302,7 @@ async function loadGroup(){
     renderGuests();
   }catch(err){
     console.error(err);
-    loading.textContent="We could not find this RSVP link.";
-    nextButton.disabled=true;
-    nextActions.style.display="none";
+    showPersonalLinkMessage();
   }
 }
 
