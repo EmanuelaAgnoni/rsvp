@@ -127,6 +127,27 @@
     ]
   },
   {
+    "id": "georgie-h238dusw",
+    "label": "Georgie",
+    "type": "Family",
+    "side": "Bean",
+    "category": "Georgie",
+    "guests": [
+      {
+        "name": "Georgie",
+        "status": "pending"
+      },
+      {
+        "name": "Ryan",
+        "status": "pending"
+      },
+      {
+        "name": "Baby",
+        "status": "pending"
+      }
+    ]
+  },
+  {
     "id": "wiktoria-h8c40nww",
     "label": "Wiktoria",
     "type": "Friend",
