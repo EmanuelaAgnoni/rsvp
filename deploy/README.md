@@ -6,7 +6,7 @@ Install dependencies:
 
 ```bash
 cd /home/pierpaolo/prj/wedding/rsvp
-.venv/bin/python -m pip install -r requirements.txt
+venv/bin/python -m pip install -r requirements.txt
 ```
 
 Install and start the service:
