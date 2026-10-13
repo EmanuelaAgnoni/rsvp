@@ -122,8 +122,9 @@ a { font: inherit; }
   transform: translateY(20%);
   opacity: 0;
   visibility: hidden;
-  transition: transform 1.25s cubic-bezier(.2,.8,.2,1),
-              opacity .18s ease .42s;
+  transition:
+    transform 1.25s cubic-bezier(.2,.8,.2,1),
+    opacity .18s ease .42s;
 }
 
 .invite-card::before {
@@ -216,8 +217,9 @@ a { font: inherit; }
   background: #efc0bd;
   clip-path: polygon(0 0, 50% 62%, 100% 0);
   transform-origin: top center;
-  transition: transform .9s cubic-bezier(.4,0,.2,1),
-              z-index 0s linear .42s;
+  transition:
+    transform .9s cubic-bezier(.4,0,.2,1),
+    z-index 0s linear .42s;
   backface-visibility: hidden;
 }
 
@@ -310,7 +312,7 @@ a { font: inherit; }
   display: none;
 }
 
-/* DESKTOP PHOTO POSITIONS */
+/* DESKTOP PHOTO POSITIONS — UNCHANGED */
 
 .hero-polaroid:nth-child(1) {
   --photo-width: 192px;
@@ -681,14 +683,15 @@ a { font: inherit; }
   min-height: 100svh;
   display: grid;
   place-items: center;
-  padding: 100px 25px;
+  padding: 125px 25px;
   overflow: hidden;
   background: var(--pink);
+  isolation: isolate;
 }
 
 .rsvp-inner {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: min(650px, 100%);
   display: block;
   margin: 0 auto;
@@ -758,6 +761,104 @@ a { font: inherit; }
   transform: rotate(2deg);
   background: var(--yellow);
   color: var(--red);
+}
+
+/* TWO RED DANCING CRABS — DESKTOP AND MOBILE */
+
+.doodle-parade {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.crab-track {
+  position: absolute;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  will-change: transform;
+}
+
+.crab-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  /* Approximate RSVP button red */
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(37%)
+    sepia(88%)
+    saturate(2142%)
+    hue-rotate(344deg)
+    brightness(98%)
+    contrast(88%);
+
+  animation: crab-wiggle .6s ease-in-out infinite alternate;
+  transform-origin: 50% 75%;
+}
+
+/* TOP CRAB — RIGHT TO LEFT */
+
+.crab-top {
+  top: 25px;
+  animation: crab-right-to-left 12s linear infinite;
+}
+
+/* BOTTOM CRAB — LEFT TO RIGHT */
+
+.crab-bottom {
+  bottom: 25px;
+  animation: crab-left-to-right 12s linear infinite;
+}
+
+@keyframes crab-left-to-right {
+  from {
+    transform: translateX(-120px);
+  }
+  to {
+    transform: translateX(calc(100vw + 120px));
+  }
+}
+
+@keyframes crab-right-to-left {
+  from {
+    transform: translateX(calc(100vw + 120px)) scaleX(-1);
+  }
+  to {
+    transform: translateX(-120px) scaleX(-1);
+  }
+}
+
+@keyframes crab-wiggle {
+  from {
+    transform: translateY(0) rotate(-7deg);
+  }
+  to {
+    transform: translateY(-9px) rotate(7deg);
+  }
+}
+
+/* MOBILE CRAB SIZE AND POSITION */
+
+@media (max-width: 700px) {
+  .crab-track {
+    width: 85px;
+    height: 85px;
+  }
+
+  .crab-top {
+    top: 35px;
+  }
+
+  .crab-bottom {
+    bottom: 12px;
+  }
 }
 
 /* COUNTDOWN FOOTER */
@@ -832,10 +933,10 @@ footer {
 @media (max-width: 700px) {
 
   .paper .small-title {
-  font-size: 11px;
-  letter-spacing: .22em;
-  margin-bottom: 30px;
-}
+    font-size: 11px;
+    letter-spacing: .22em;
+    margin-bottom: 30px;
+  }
 
   .opening-inner {
     width: 90vw;
@@ -845,7 +946,6 @@ footer {
     margin-bottom: 55px;
   }
 
-  /* Four photos, no circular gradient */
   .hero {
     min-height: 100svh;
     padding: 180px 20px 175px;
@@ -880,28 +980,24 @@ footer {
     box-shadow: 5px 6px 0 rgba(233,74,43,.13);
   }
 
-  /* Top left */
   .hero-polaroid:nth-child(1) {
     top: 13%;
     left: 25%;
     transform: translate(-50%, -50%) rotate(-10deg);
   }
 
-  /* Top right */
   .hero-polaroid:nth-child(3) {
     top: 13%;
     left: 75%;
     transform: translate(-50%, -50%) rotate(8deg);
   }
 
-  /* Bottom left */
   .hero-polaroid:nth-child(7) {
     top: 87%;
     left: 25%;
     transform: translate(-50%, -50%) rotate(7deg);
   }
 
-  /* Bottom right */
   .hero-polaroid:nth-child(9) {
     top: 87%;
     left: 75%;
@@ -960,7 +1056,7 @@ footer {
   }
 
   .rsvp {
-    padding: 75px 18px;
+    padding: 125px 18px;
   }
 
   .rsvp-card {
@@ -1048,6 +1144,8 @@ footer {
   }
 }
 
+/* REDUCED MOTION */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1055,7 +1153,22 @@ footer {
     scroll-behavior: auto !important;
     transition-duration: .01ms !important;
   }
+
+  .crab-track,
+  .crab-image {
+    animation: none !important;
+  }
+
+  .crab-bottom {
+    left: 5%;
+  }
+
+  .crab-top {
+    left: auto;
+    right: 5%;
+  }
 }
+
 </style>
 </head>
 
@@ -1070,10 +1183,13 @@ footer {
       <span class="title-star">★</span>
     </div>
 
-    <div class="envelope-wrap" id="envelope"
-         role="button" tabindex="0"
-         aria-label="Open wedding invitation">
-
+    <div
+      class="envelope-wrap"
+      id="envelope"
+      role="button"
+      tabindex="0"
+      aria-label="Open wedding invitation"
+    >
       <div class="envelope">
         <div class="envelope-back"></div>
         <div class="liner"></div>
@@ -1158,9 +1274,11 @@ footer {
 
   <div class="hero-inner">
 
-    <div class="personal-invite"
-         id="personalInvite"
-         aria-live="polite"></div>
+    <div
+      class="personal-invite"
+      id="personalInvite"
+      aria-live="polite"
+    ></div>
 
     <h1>Pierpaolo<em>&amp;</em>Emanuela</h1>
 
@@ -1191,9 +1309,11 @@ footer {
       </h2>
     </div>
 
-    <svg class="doodle"
-         style="width:130px;right:25px;top:20px;color:var(--green);transform:rotate(15deg);"
-         viewBox="0 0 120 180">
+    <svg
+      class="doodle"
+      style="width:130px;right:25px;top:20px;color:var(--green);transform:rotate(15deg);"
+      viewBox="0 0 120 180"
+    >
       <path d="M60 175 C57 135 60 100 58 64"/>
       <path d="M58 116 C31 103 25 125 53 136"/>
       <path d="M60 143 C85 126 95 145 66 157"/>
@@ -1239,6 +1359,30 @@ footer {
 <!-- RSVP -->
 
 <section class="rsvp">
+
+  <!-- TWO RED DANCING CRABS ON DESKTOP AND MOBILE -->
+  <div class="doodle-parade" aria-hidden="true">
+
+    <!-- Bottom crab: left to right -->
+    <div class="crab-track crab-bottom">
+      <img
+        class="crab-image"
+        src="/static/assets/dancing-crab.png"
+        alt=""
+      >
+    </div>
+
+    <!-- Top crab: right to left -->
+    <div class="crab-track crab-top">
+      <img
+        class="crab-image"
+        src="/static/assets/dancing-crab.png"
+        alt=""
+      >
+    </div>
+
+  </div>
+
   <div class="rsvp-inner">
     <div class="rsvp-card reveal">
 
@@ -1252,23 +1396,28 @@ footer {
         We would love nothing more than to celebrate with you.
       </div>
 
-      <a class="rsvp-button"
-         id="rsvpButton"
-         href="/rsvp">
+      <a
+        class="rsvp-button"
+        id="rsvpButton"
+        href="/rsvp"
+      >
         RSVP
       </a>
 
     </div>
   </div>
+
 </section>
 
 <!-- COUNTDOWN -->
 
 <footer>
-  <div class="footer-countdown"
-       id="weddingCountdown"
-       role="timer"
-       aria-label="Time remaining until 3 September 2027 at 17:00 Italian time">
+  <div
+    class="footer-countdown"
+    id="weddingCountdown"
+    role="timer"
+    aria-label="Time remaining until 3 September 2027 at 17:00 Italian time"
+  >
 
     <div class="footer-countdown-unit">
       <span id="countDays">—</span>
@@ -1292,9 +1441,11 @@ footer {
 
   </div>
 
-  <div class="footer-countdown-finished"
-       id="countdownDate"
-       aria-live="polite"></div>
+  <div
+    class="footer-countdown-finished"
+    id="countdownDate"
+    aria-live="polite"
+  ></div>
 </footer>
 
 </main>
