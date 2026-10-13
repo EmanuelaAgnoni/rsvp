@@ -205,14 +205,14 @@
     ]
   },
   {
-    "id": "abby-photographer-mi05xy2r",
-    "label": "Abby (Photographer)",
+    "id": "abby-mi05xy2r",
+    "label": "Abby",
     "type": "Friend",
     "side": "Bean",
     "category": "Single",
     "guests": [
       {
-        "name": "Abby (Photographer)",
+        "name": "Abby",
         "status": "pending"
       }
     ]
