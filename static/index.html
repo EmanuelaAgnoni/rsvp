@@ -307,13 +307,7 @@ a { font: inherit; }
 }
 
 .hero-polaroid::after {
-  content: "";
-  position: absolute;
-  left: 18%;
-  right: 18%;
-  bottom: 12px;
-  height: 2px;
-  background: rgba(39,139,106,.22);
+  display: none;
 }
 
 /* DESKTOP PHOTO POSITIONS */
@@ -836,6 +830,12 @@ footer {
 /* MOBILE DESIGN */
 
 @media (max-width: 700px) {
+
+  .paper .small-title {
+  font-size: 11px;
+  letter-spacing: .22em;
+  margin-bottom: 30px;
+}
 
   .opening-inner {
     width: 90vw;
