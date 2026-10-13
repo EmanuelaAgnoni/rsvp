@@ -1,0 +1,17 @@
+[Unit]
+Description=Wedding RSVP Flask app
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pierpaolo
+Group=pierpaolo
+WorkingDirectory=/home/pierpaolo/prj/wedding/rsvp
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/pierpaolo/prj/wedding/rsvp/venv/bin/gunicorn --workers 2 --bind 0.0.0.0:5000 app:app
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
