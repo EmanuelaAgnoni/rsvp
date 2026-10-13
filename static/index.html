@@ -34,7 +34,7 @@ body {
 a { font: inherit; }
 ::selection { background: var(--yellow); color: var(--red); }
 
-/* Opening envelope */
+/* OPENING ENVELOPE */
 
 .opening {
   position: fixed;
@@ -122,7 +122,8 @@ a { font: inherit; }
   transform: translateY(20%);
   opacity: 0;
   visibility: hidden;
-  transition: transform 1.25s cubic-bezier(.2,.8,.2,1), opacity .18s ease .42s;
+  transition: transform 1.25s cubic-bezier(.2,.8,.2,1),
+              opacity .18s ease .42s;
 }
 
 .invite-card::before {
@@ -215,7 +216,8 @@ a { font: inherit; }
   background: #efc0bd;
   clip-path: polygon(0 0, 50% 62%, 100% 0);
   transform-origin: top center;
-  transition: transform .9s cubic-bezier(.4,0,.2,1), z-index 0s linear .42s;
+  transition: transform .9s cubic-bezier(.4,0,.2,1),
+              z-index 0s linear .42s;
   backface-visibility: hidden;
 }
 
@@ -245,6 +247,7 @@ a { font: inherit; }
 .envelope-wrap.open .invite-card {
   opacity: 1;
   visibility: visible;
+  transform: translateY(-44%);
 }
 
 .envelope-wrap.open .flap {
@@ -257,11 +260,7 @@ a { font: inherit; }
   transform: translate(-50%, -50%) rotate(18deg) scale(.5);
 }
 
-.envelope-wrap.open .invite-card {
-  transform: translateY(-44%);
-}
-
-/* Hero */
+/* HERO */
 
 .hero {
   position: relative;
@@ -293,9 +292,10 @@ a { font: inherit; }
   margin: 0;
   padding: 10px 10px 30px;
   background: #fffaf0;
-  border: 1px solid rgba(24, 59, 50, .12);
-  box-shadow: 9px 12px 0 rgba(233, 74, 43, .14);
-  transform: translate(-50%, -50%) rotate(var(--photo-rotate, -4deg));
+  border: 1px solid rgba(24,59,50,.12);
+  box-shadow: 9px 12px 0 rgba(233,74,43,.14);
+  transform: translate(-50%, -50%)
+             rotate(var(--photo-rotate, -4deg));
 }
 
 .hero-polaroid img {
@@ -313,8 +313,10 @@ a { font: inherit; }
   right: 18%;
   bottom: 12px;
   height: 2px;
-  background: rgba(39, 139, 106, .22);
+  background: rgba(39,139,106,.22);
 }
+
+/* DESKTOP PHOTO POSITIONS */
 
 .hero-polaroid:nth-child(1) {
   --photo-width: 192px;
@@ -328,7 +330,7 @@ a { font: inherit; }
   --photo-rotate: 4deg;
   top: 24%;
   left: 75%;
-  box-shadow: 9px 12px 0 rgba(49, 93, 168, .16);
+  box-shadow: 9px 12px 0 rgba(49,93,168,.16);
 }
 
 .hero-polaroid:nth-child(3) {
@@ -343,7 +345,7 @@ a { font: inherit; }
   --photo-rotate: -13deg;
   top: 11%;
   left: 91%;
-  box-shadow: 9px 12px 0 rgba(39, 139, 106, .14);
+  box-shadow: 9px 12px 0 rgba(39,139,106,.14);
 }
 
 .hero-polaroid:nth-child(5) {
@@ -351,7 +353,7 @@ a { font: inherit; }
   --photo-rotate: 12deg;
   top: 76%;
   left: 18%;
-  box-shadow: 9px 12px 0 rgba(49, 93, 168, .14);
+  box-shadow: 9px 12px 0 rgba(49,93,168,.14);
 }
 
 .hero-polaroid:nth-child(6) {
@@ -366,7 +368,7 @@ a { font: inherit; }
   --photo-rotate: -4deg;
   top: 91%;
   left: 39%;
-  box-shadow: 9px 12px 0 rgba(39, 139, 106, .13);
+  box-shadow: 9px 12px 0 rgba(39,139,106,.13);
 }
 
 .hero-polaroid:nth-child(8) {
@@ -381,7 +383,7 @@ a { font: inherit; }
   --photo-rotate: -6deg;
   top: 6%;
   left: 48%;
-  box-shadow: 8px 10px 0 rgba(39, 139, 106, .12);
+  box-shadow: 8px 10px 0 rgba(39,139,106,.12);
 }
 
 .hero-polaroid:nth-child(10) {
@@ -389,7 +391,7 @@ a { font: inherit; }
   --photo-rotate: 7deg;
   top: 37%;
   left: 24%;
-  box-shadow: 8px 10px 0 rgba(233, 183, 180, .45);
+  box-shadow: 8px 10px 0 rgba(233,183,180,.45);
 }
 
 .hero-polaroid:nth-child(11) {
@@ -397,7 +399,7 @@ a { font: inherit; }
   --photo-rotate: -12deg;
   top: 71%;
   left: 6%;
-  box-shadow: 8px 10px 0 rgba(49, 93, 168, .13);
+  box-shadow: 8px 10px 0 rgba(49,93,168,.13);
 }
 
 .hero-polaroid:nth-child(12) {
@@ -405,7 +407,7 @@ a { font: inherit; }
   --photo-rotate: 5deg;
   top: 42%;
   left: 98%;
-  box-shadow: 8px 10px 0 rgba(233, 74, 43, .13);
+  box-shadow: 8px 10px 0 rgba(233,74,43,.13);
 }
 
 .hero h1 {
@@ -432,10 +434,10 @@ a { font: inherit; }
   max-width: min(420px, 100%);
   margin: 0 auto 30px;
   padding: 10px 18px;
-  background: rgba(255, 248, 237, .78);
+  background: rgba(255,248,237,.78);
   color: var(--green);
-  border: 1px solid rgba(39, 139, 106, .32);
-  box-shadow: 5px 6px 0 rgba(233, 183, 180, .45);
+  border: 1px solid rgba(39,139,106,.32);
+  box-shadow: 5px 6px 0 rgba(233,183,180,.45);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: .22em;
@@ -473,23 +475,7 @@ a { font: inherit; }
   text-transform: uppercase;
 }
 
-.doodle {
-  position: absolute;
-  pointer-events: none;
-  overflow: visible;
-}
-
-.doodle path,
-.doodle circle,
-.doodle ellipse {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Save the date */
+/* SAVE THE DATE */
 
 .paper-zone {
   padding: 110px 20px;
@@ -542,14 +528,30 @@ a { font: inherit; }
   font-weight: 400;
 }
 
-/* Venue: starry sky background */
+.doodle {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.doodle path,
+.doodle circle,
+.doodle ellipse {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* VENUE */
 
 .venue {
   position: relative;
-  min-height: 760px;
+  min-height: 0;
   display: grid;
   place-items: center;
-  padding: 100px 25px;
+  padding: 65px 25px;
   overflow: hidden;
   background:
     var(--blue)
@@ -568,28 +570,25 @@ a { font: inherit; }
   pointer-events: none;
 }
 
-/* Two separate boxes: 60% photo, 40% glass card */
-
 .venue-layout {
   position: relative;
   z-index: 2;
-  width: min(1200px, 100%);
+  width: min(1100px, 100%);
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   gap: 24px;
   align-items: stretch;
 }
 
-/* Venue photo: no offset shadow */
-
 .venue-photo {
   margin: 0;
   min-width: 0;
+  height: 460px;
   overflow: hidden;
-  border: 1px solid rgba(255,248,237,.65);
+  border: 1px solid rgba(255,248,237,.5);
   background: var(--paper);
   box-shadow: none;
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 .venue-photo img {
@@ -600,30 +599,23 @@ a { font: inherit; }
   object-position: center;
 }
 
-/* Frosted blue glass: stars show through */
-
 .venue-card {
   position: relative;
   z-index: 2;
   width: 100%;
   min-width: 0;
-  height: 100%;
-  padding: 50px 25px;
+  height: 460px;
+  min-height: 0;
+  padding: 30px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
- 
-  
-  background: rgba(27, 65, 115, 0.02);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-
-
-
-  border: 1px solid rgba(255,248,237,.45);
-  border-radius: 8px;
+  background: rgba(27,65,115,.015);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(255,248,237,.4);
+  border-radius: 0;
   color: var(--paper);
   text-align: center;
   box-shadow: none;
@@ -639,7 +631,7 @@ a { font: inherit; }
   margin: 0;
   color: var(--paper);
   font-family: "Instrument Serif", serif;
-  font-size: clamp(38px, 4.2vw, 60px);
+  font-size: clamp(34px, 3.8vw, 52px);
   font-weight: 400;
   line-height: .95;
 }
@@ -651,7 +643,7 @@ a { font: inherit; }
 }
 
 .venue-name {
-  margin-top: 36px;
+  margin-top: 24px;
   color: var(--paper);
   font-family: "Instrument Serif", serif;
   font-size: 28px;
@@ -668,7 +660,7 @@ a { font: inherit; }
 
 .map-link {
   display: inline-block;
-  margin-top: 35px;
+  margin-top: 25px;
   padding: 14px 23px;
   background: transparent;
   color: var(--paper);
@@ -683,13 +675,12 @@ a { font: inherit; }
 
 .map-link:hover {
   transform: translateY(-2px);
-  background: rgba(255, 248, 237, 0.12);
+  background: rgba(255,248,237,.12);
   color: var(--paper);
   border-color: var(--paper);
 }
 
-
-/* Centered RSVP */
+/* RSVP */
 
 .rsvp {
   position: relative;
@@ -775,7 +766,7 @@ a { font: inherit; }
   color: var(--red);
 }
 
-/* Compact yellow footer */
+/* COUNTDOWN FOOTER */
 
 footer {
   padding: 30px 15px;
@@ -829,7 +820,7 @@ footer {
   display: none;
 }
 
-/* Scroll reveal */
+/* SCROLL REVEAL */
 
 .reveal {
   opacity: 0;
@@ -842,9 +833,10 @@ footer {
   transform: translateY(0) rotate(0);
 }
 
-/* Mobile */
+/* MOBILE DESIGN */
 
 @media (max-width: 700px) {
+
   .opening-inner {
     width: 90vw;
   }
@@ -853,92 +845,71 @@ footer {
     margin-bottom: 55px;
   }
 
+  /* Four photos, no circular gradient */
   .hero {
-    padding: 100px 22px 85px;
+    min-height: 100svh;
+    padding: 180px 20px 175px;
+    display: grid;
+    place-items: center;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 3;
+    width: 100%;
   }
 
   .hero-inner::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: -28px -12px;
-    background: radial-gradient(ellipse at center, rgba(233, 216, 90, .96) 0 58%, rgba(233, 216, 90, 0) 76%);
-    pointer-events: none;
+    display: none !important;
+    content: none !important;
+    background: none !important;
   }
 
   .hero-polaroid {
-    display: block;
-    width: clamp(76px, 18vw, 104px);
-    padding: 6px 6px 17px;
-    box-shadow: 5px 6px 0 rgba(233, 74, 43, .13);
+    display: none;
   }
 
-  .hero-polaroid:nth-child(1) {
-    top: 10%;
-    left: 17%;
-  }
-
-  .hero-polaroid:nth-child(2) {
-    top: 7%;
-    left: 48%;
-  }
-
-  .hero-polaroid:nth-child(3) {
-    top: 12%;
-    left: 80%;
-  }
-
-  .hero-polaroid:nth-child(4) {
-    top: 29%;
-    left: 10%;
-  }
-
-  .hero-polaroid:nth-child(5) {
-    top: 32%;
-    left: 90%;
-    opacity: .92;
-  }
-
-  .hero-polaroid:nth-child(6) {
-    top: 55%;
-    left: 11%;
-    opacity: .92;
-  }
-
-  .hero-polaroid:nth-child(7) {
-    top: 59%;
-    left: 89%;
-  }
-
-  .hero-polaroid:nth-child(8) {
-    top: 79%;
-    left: 18%;
-  }
-
+  .hero-polaroid:nth-child(1),
+  .hero-polaroid:nth-child(3),
+  .hero-polaroid:nth-child(7),
   .hero-polaroid:nth-child(9) {
-    top: 85%;
-    left: 45%;
+    display: block;
+    width: clamp(100px, 29vw, 145px);
+    padding: 7px 7px 21px;
+    opacity: 1;
+    box-shadow: 5px 6px 0 rgba(233,74,43,.13);
   }
 
-  .hero-polaroid:nth-child(10) {
-    top: 78%;
-    left: 73%;
+  /* Top left */
+  .hero-polaroid:nth-child(1) {
+    top: 13%;
+    left: 25%;
+    transform: translate(-50%, -50%) rotate(-10deg);
   }
 
-  .hero-polaroid:nth-child(11) {
-    top: 42%;
-    left: 8%;
-    opacity: .9;
+  /* Top right */
+  .hero-polaroid:nth-child(3) {
+    top: 13%;
+    left: 75%;
+    transform: translate(-50%, -50%) rotate(8deg);
   }
 
-  .hero-polaroid:nth-child(12) {
-    top: 45%;
-    left: 92%;
-    opacity: .9;
+  /* Bottom left */
+  .hero-polaroid:nth-child(7) {
+    top: 87%;
+    left: 25%;
+    transform: translate(-50%, -50%) rotate(7deg);
+  }
+
+  /* Bottom right */
+  .hero-polaroid:nth-child(9) {
+    top: 87%;
+    left: 75%;
+    transform: translate(-50%, -50%) rotate(-8deg);
   }
 
   .hero h1 {
-    font-size: clamp(67px, 21vw, 105px);
+    font-size: clamp(58px, 17vw, 90px);
   }
 
   .personal-invite {
@@ -951,11 +922,12 @@ footer {
 
   .invite-copy {
     max-width: 330px;
+    margin-top: 35px;
     font-size: 19px;
   }
 
-  .doodle {
-    opacity: .85;
+  .main-date {
+    margin-top: 30px;
   }
 
   .paper-zone {
@@ -969,23 +941,22 @@ footer {
   }
 
   .venue {
-    min-height: 700px;
-    padding: 80px 20px;
+    padding: 55px 20px;
   }
 
   .venue-layout {
     grid-template-columns: 1fr;
-    gap: 25px;
+    gap: 20px;
   }
 
   .venue-photo {
-    height: 320px;
+    height: 300px;
   }
 
   .venue-card {
     height: auto;
-    min-height: 360px;
-    padding: 55px 22px;
+    min-height: 320px;
+    padding: 40px 20px;
   }
 
   .rsvp {
@@ -997,77 +968,42 @@ footer {
   }
 }
 
+/* SMALL PHONES */
+
 @media (max-width: 500px) {
+
   .hero {
-    min-height: 100svh;
-    padding: 94px 20px 78px;
+    padding: 165px 18px 155px;
   }
 
-  .hero-polaroid {
-    display: block;
-    width: clamp(58px, 21vw, 74px);
-    padding: 5px 5px 14px;
-    box-shadow: 4px 5px 0 rgba(233, 74, 43, .12);
-  }
-
-  .hero-polaroid:nth-child(1) {
-    top: 8%;
-    left: 16%;
-  }
-
-  .hero-polaroid:nth-child(2) {
-    top: 7%;
-    left: 48%;
-  }
-
-  .hero-polaroid:nth-child(3) {
-    top: 10%;
-    left: 82%;
-  }
-
-  .hero-polaroid:nth-child(4) {
-    top: 28%;
-    left: 13%;
-  }
-
-  .hero-polaroid:nth-child(5) {
-    top: 30%;
-    left: 87%;
-  }
-
-  .hero-polaroid:nth-child(6) {
-    top: 53%;
-    left: 12%;
-  }
-
-  .hero-polaroid:nth-child(7) {
-    top: 57%;
-    left: 88%;
-  }
-
-  .hero-polaroid:nth-child(8) {
-    top: 82%;
-    left: 17%;
-  }
-
+  .hero-polaroid:nth-child(1),
+  .hero-polaroid:nth-child(3),
+  .hero-polaroid:nth-child(7),
   .hero-polaroid:nth-child(9) {
-    top: 87%;
-    left: 48%;
+    width: clamp(90px, 28vw, 120px);
   }
 
-  .hero-polaroid:nth-child(10) {
-    top: 81%;
-    left: 82%;
+  .hero-polaroid:nth-child(1),
+  .hero-polaroid:nth-child(3) {
+    top: 12%;
   }
 
-  .hero-polaroid:nth-child(11) {
-    top: 42%;
-    left: 12%;
+  .hero-polaroid:nth-child(7),
+  .hero-polaroid:nth-child(9) {
+    top: 88%;
   }
 
-  .hero-polaroid:nth-child(12) {
-    top: 43%;
-    left: 88%;
+  .hero h1 {
+    font-size: clamp(54px, 16vw, 78px);
+  }
+
+  .invite-copy {
+    font-size: 18px;
+    margin-top: 32px;
+  }
+
+  .main-date {
+    margin-top: 30px;
   }
 
   footer {
@@ -1088,6 +1024,30 @@ footer {
   }
 }
 
+/* VERY SMALL PHONES */
+
+@media (max-width: 380px) {
+
+  .hero {
+    padding: 145px 16px 140px;
+  }
+
+  .hero-polaroid:nth-child(1),
+  .hero-polaroid:nth-child(3),
+  .hero-polaroid:nth-child(7),
+  .hero-polaroid:nth-child(9) {
+    width: 92px;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 15vw, 65px);
+  }
+
+  .invite-copy {
+    font-size: 17px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1096,99 +1056,12 @@ footer {
     transition-duration: .01ms !important;
   }
 }
-
-
-/* Compact venue section */
-
-.venue {
-  min-height: 0;
-  padding: 65px 25px;
-}
-
-/* 60% photo, 40% frosted-glass card */
-
-.venue-layout {
-  width: min(1100px, 100%);
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: 24px;
-  align-items: stretch;
-}
-
-/* Shorter venue photo */
-
-.venue-photo {
-  height: 460px;
-  border: 1px solid rgba(255, 248, 237, .5);
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.venue-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Blue frosted glass, with stars visible underneath */
-
-.venue-card {
-  height: 460px;
-  min-height: 0;
-  padding: 30px 20px;
-
-  background: rgba(27, 65, 115, 0.015);
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
-
-
-  border: 1px solid rgba(255, 248, 237, .4);
-  border-radius: 0;
-  box-shadow: none;
-}
-
-/* Smaller title to fit the shorter card */
-
-.venue-card h2 {
-  font-size: clamp(34px, 3.8vw, 52px);
-}
-
-.venue-name {
-  margin-top: 24px;
-}
-
-.map-link {
-  margin-top: 25px;
-}
-
-/* Mobile: keep boxes stacked */
-
-@media (max-width: 700px) {
-  .venue {
-    padding: 55px 20px;
-  }
-
-  .venue-layout {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .venue-photo {
-    height: 300px;
-  }
-
-  .venue-card {
-    height: auto;
-    min-height: 320px;
-    padding: 40px 20px;
-  }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- Opening invitation -->
+<!-- OPENING INVITATION -->
 
 <section class="opening" id="opening">
   <div class="opening-inner">
@@ -1200,6 +1073,7 @@ footer {
     <div class="envelope-wrap" id="envelope"
          role="button" tabindex="0"
          aria-label="Open wedding invitation">
+
       <div class="envelope">
         <div class="envelope-back"></div>
         <div class="liner"></div>
@@ -1226,51 +1100,67 @@ footer {
 
 <main>
 
-<!-- Main invitation -->
+<!-- MAIN INVITATION -->
 
 <section class="hero">
 
   <div class="hero-polaroids" aria-hidden="true">
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-01.jpeg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-01.jpg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-02.jpeg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-02.jpg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-03.jpeg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-03.jpg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-04.jpeg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-04.jpg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-05.jpeg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-06.jpeg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-07.jpeg" alt="" decoding="async">
     </figure>
+
     <figure class="hero-polaroid">
       <img src="/static/assets/photo-08.jpeg" alt="" decoding="async">
     </figure>
+
   </div>
 
   <div class="hero-inner">
-    <div class="personal-invite" id="personalInvite" aria-live="polite"></div>
+
+    <div class="personal-invite"
+         id="personalInvite"
+         aria-live="polite"></div>
 
     <h1>Pierpaolo<em>&amp;</em>Emanuela</h1>
 
@@ -1284,15 +1174,18 @@ footer {
     <div class="main-place">
       Casale Malatesta · Velletri · Italy
     </div>
+
   </div>
 </section>
 
-<!-- More information -->
+<!-- SAVE THE DATE -->
 
 <section class="paper-zone">
   <article class="paper reveal">
+
     <div class="paper-content">
       <div class="small-title">Save the date</div>
+
       <h2 class="big-heading">
         More info<br><em>coming soon.</em>
       </h2>
@@ -1306,10 +1199,11 @@ footer {
       <path d="M60 143 C85 126 95 145 66 157"/>
       <path d="M58 65 C35 61 27 42 40 35 C40 14 57 14 60 35 C67 14 84 19 79 39 C101 39 96 61 75 65 C72 84 51 82 58 65"/>
     </svg>
+
   </article>
 </section>
 
-<!-- Venue: photo left, glass card right -->
+<!-- VENUE -->
 
 <section class="venue">
   <div class="venue-layout">
@@ -1331,7 +1225,7 @@ footer {
 
       <a
         class="map-link"
-        href="https://www.google.com/maps/place/Casale+Malatesta/@41.6659753,12.8227601,17z/data=!4m18!1m8!3m7!1s0x132577f03a455963:0x736c2f9a6a9cda38!2sVia+Casale+di+Malatesta,+00049+Velletri+RM,+Italy!3b1!8m2!3d41.6659753!4d12.8227601!16s%2Fg%2F11b6gd5cvt!3m8!1s0x13257732ec90fb03:0x8ddfd0e89d26cc31!5m2!4m1!1i2!8m2!3d41.6661031!4d12.8247802!16s%2Fg%2F11lcmzgw0r?entry=ttu&amp;g_ep=EgoyMDI2MDkzMC4wIKXMDSoASAFQAw%3D%3D"
+        href="https://www.google.com/maps/search/?api=1&amp;query=Casale+Malatesta+Velletri+Italy"
         target="_blank"
         rel="noopener"
       >
@@ -1342,11 +1236,12 @@ footer {
   </div>
 </section>
 
-<!-- Centered RSVP -->
+<!-- RSVP -->
 
 <section class="rsvp">
   <div class="rsvp-inner">
     <div class="rsvp-card reveal">
+
       <div class="rsvp-small">
         One very important question
       </div>
@@ -1357,17 +1252,21 @@ footer {
         We would love nothing more than to celebrate with you.
       </div>
 
-      <a class="rsvp-button" id="rsvpButton" href="/rsvp">
+      <a class="rsvp-button"
+         id="rsvpButton"
+         href="/rsvp">
         RSVP
       </a>
+
     </div>
   </div>
 </section>
 
-<!-- Compact countdown footer -->
+<!-- COUNTDOWN -->
 
 <footer>
-  <div class="footer-countdown" id="weddingCountdown"
+  <div class="footer-countdown"
+       id="weddingCountdown"
        role="timer"
        aria-label="Time remaining until 3 September 2027 at 17:00 Italian time">
 
@@ -1390,6 +1289,7 @@ footer {
       <span id="countSeconds">—</span>
       <small>Seconds</small>
     </div>
+
   </div>
 
   <div class="footer-countdown-finished"
@@ -1405,7 +1305,7 @@ const envelope = document.getElementById("envelope");
 const rsvpButton = document.getElementById("rsvpButton");
 const personalInvite = document.getElementById("personalInvite");
 
-const invitePath = location.pathname.replace(/^\/|\/$/g, "");
+const invitePath = location.pathname.replace(/^\/+|\/+$/g, "");
 
 let hasOpened = false;
 
@@ -1417,11 +1317,15 @@ async function personalizeInvite() {
   if (!invitePath || !personalInvite) return;
 
   try {
-    const response = await fetch(`/api/rsvp/${encodeURIComponent(invitePath)}`);
+    const response = await fetch(
+      `/api/rsvp/${encodeURIComponent(invitePath)}`
+    );
+
     if (!response.ok) return;
 
     const group = await response.json();
     const category = String(group.category || "").toLowerCase();
+
     const isPersonalInvite =
       category === "single" || category.includes("plus");
 
@@ -1429,13 +1333,19 @@ async function personalizeInvite() {
 
     const firstNames = Array.isArray(group.guests)
       ? group.guests
-          .map(guest => String(guest.name || "").trim().split(/\s+/)[0])
+          .map(guest =>
+            String(guest.name || "").trim().split(/\s+/)[0]
+          )
           .filter(Boolean)
       : [];
-    const displayName = firstNames.length ? firstNames.join(" and ") : group.label;
+
+    const displayName = firstNames.length
+      ? firstNames.join(" and ")
+      : group.label;
 
     personalInvite.textContent = `Dear ${displayName},`;
     personalInvite.classList.add("visible");
+
   } catch (err) {
     console.error(err);
   }
@@ -1463,7 +1373,7 @@ envelope.addEventListener("keydown", event => {
   }
 });
 
-/* Reveal sections while scrolling */
+/* SCROLL REVEAL */
 
 const revealElements = document.querySelectorAll(".reveal");
 
@@ -1477,7 +1387,7 @@ const observer = new IntersectionObserver(entries => {
 
 revealElements.forEach(element => observer.observe(element));
 
-/* Wedding countdown: 3 September 2027, 17:00 Italian time */
+/* WEDDING COUNTDOWN */
 
 const weddingTime = Date.parse("2027-09-03T17:00:00+02:00");
 
@@ -1496,10 +1406,12 @@ function updateWeddingCountdown() {
     String(Math.floor(totalSeconds / 86400));
 
   countdownFields.hours.textContent =
-    String(Math.floor(totalSeconds % 86400 / 3600)).padStart(2, "0");
+    String(Math.floor(totalSeconds % 86400 / 3600))
+      .padStart(2, "0");
 
   countdownFields.minutes.textContent =
-    String(Math.floor(totalSeconds % 3600 / 60)).padStart(2, "0");
+    String(Math.floor(totalSeconds % 3600 / 60))
+      .padStart(2, "0");
 
   countdownFields.seconds.textContent =
     String(totalSeconds % 60).padStart(2, "0");
