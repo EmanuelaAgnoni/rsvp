@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 app = Flask(__name__, static_folder="static")
 
 DATA_FILE = Path(__file__).parent / "rsvp.json"
+ADMIN_SLUG = "matrimonio-rsvp-control-7n4qk2"
 write_lock = Lock()
 
 VALID_STATUSES = {"pending", "yes", "no"}
@@ -95,11 +96,11 @@ def named_rsvp_page(invite_name):
 
     return send_from_directory("static", "rsvp.html")
 
-@app.route("/admin")
+@app.route(f"/{ADMIN_SLUG}")
 def admin_page():
-    return send_from_directory("static", "admin.html")
+    return send_from_directory("private", "admin.html")
 
-@app.route("/api/admin")
+@app.route(f"/api/{ADMIN_SLUG}")
 def admin_data():
     return jsonify(build_admin_summary(load_rsvp_groups()))
 

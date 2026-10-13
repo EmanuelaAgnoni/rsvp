@@ -139,7 +139,7 @@ function renderGroups(groups){
 
 async function loadAdmin(){
   try{
-    const response=await fetch("/api/admin");
+    const response=await fetch("/api/matrimonio-rsvp-control-7n4qk2");
     if(!response.ok)throw new Error("Unable to load admin data");
     const data=await response.json();
     renderStats(data.totals);

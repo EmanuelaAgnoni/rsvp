@@ -358,15 +358,24 @@
         "status": "pending"
       },
       {
-        "name": "Erasmo",
-        "status": "pending"
-      },
-      {
         "name": "Teresa",
         "status": "pending"
       },
       {
         "name": "Giovanni",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "erasmo-family",
+    "label": "Erasmo",
+    "type": "Family",
+    "side": "Bean",
+    "category": "Beans",
+    "guests": [
+      {
+        "name": "Erasmo",
         "status": "pending"
       },
       {
