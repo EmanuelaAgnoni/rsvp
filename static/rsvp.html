@@ -128,7 +128,7 @@ textarea.field{min-height:120px;resize:vertical;border:2px solid var(--green);pa
 
 <main class="page">
 
-  <a class="back" href="index.html">← Back to invitation</a>
+  <a class="back" href="/" data-invitation-link>← Back to invitation</a>
 
 
 
@@ -202,7 +202,7 @@ textarea.field{min-height:120px;resize:vertical;border:2px solid var(--green);pa
 
         <p id="thanksText">Thank you for submitting your RSVP. ♥</p>
 
-        <a href="/">Back to the invitation →</a>
+        <a href="/" data-invitation-link>Back to the invitation →</a>
 
       </div>
 
@@ -231,6 +231,9 @@ const nextButton=form.querySelector(".next");
 const nextActions=nextButton.closest(".actions");
 const invitePath=location.pathname.replace(/^\/|\/$/g, "");
 const inviteName=decodeURIComponent(invitePath.replace(/^rsvp\/?/, ""));
+document.querySelectorAll("[data-invitation-link]").forEach(link=>{
+  link.href=inviteName?`/${encodeURIComponent(inviteName)}`:"/";
+});
 let current=0;
 let rsvpGroup=null;
 let submitting=false;
